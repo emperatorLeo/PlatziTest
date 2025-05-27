@@ -52,6 +52,17 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.gson.converter)
+
+    // Okhttp
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging.interceptor)
+
+    // Gson
+    implementation(libs.gson)
+
     //Hilt
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation)
