@@ -4,6 +4,8 @@ import com.example.platzitest.BuildConfig.BASE_URL
 import com.example.platzitest.data.apidatasource.ApiDataSource
 import com.example.platzitest.data.apidatasource.ApiDataSourceImp
 import com.example.platzitest.data.remote.SoundService
+import com.example.platzitest.data.repository.Repository
+import com.example.platzitest.data.repository.RepositoryImp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,5 +44,10 @@ object ApiModule {
     @Provides
     fun provideApiDataSource(soundService: SoundService): ApiDataSource {
         return ApiDataSourceImp(soundService)
+    }
+
+    @Provides
+    fun provideRepository(apiDataSource: ApiDataSource): Repository {
+        return RepositoryImp(apiDataSource)
     }
 }
