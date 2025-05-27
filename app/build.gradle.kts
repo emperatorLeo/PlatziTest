@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -18,6 +20,16 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        android.buildFeatures.buildConfig = true
+
+        val properties = Properties()
+
+        properties.load(project.rootProject.file("local.properties").inputStream())
+
+        buildConfigField("String", "CLIENT_ID", properties.getProperty("client_id"))
+        buildConfigField("String", "API_KEY", properties.getProperty("api_key"))
+        buildConfigField("String", "ACCESS_TOKEN", properties.getProperty("access_token"))
+        buildConfigField("String", "REFRESH_TOKEN", properties.getProperty("refresh_token"))
     }
 
     buildTypes {
