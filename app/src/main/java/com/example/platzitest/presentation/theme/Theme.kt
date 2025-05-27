@@ -1,4 +1,4 @@
-package com.example.platzitest.ui.theme
+package com.example.platzitest.presentation.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

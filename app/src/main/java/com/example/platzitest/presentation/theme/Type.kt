@@ -1,4 +1,4 @@
-package com.example.platzitest.ui.theme
+package com.example.platzitest.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
