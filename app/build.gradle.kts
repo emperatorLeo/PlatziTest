@@ -25,11 +25,11 @@ android {
         val properties = Properties()
 
         properties.load(project.rootProject.file("local.properties").inputStream())
-
-        buildConfigField("String", "CLIENT_ID", properties.getProperty("client_id"))
-        buildConfigField("String", "API_KEY", properties.getProperty("api_key"))
-        buildConfigField("String", "ACCESS_TOKEN", properties.getProperty("access_token"))
-        buildConfigField("String", "REFRESH_TOKEN", properties.getProperty("refresh_token"))
+        buildConfigField("String", "CLIENT_ID", "\"${properties.getProperty("client_id")}\"")
+        buildConfigField("String", "API_KEY", "\"${properties.getProperty("api_key")}\"")
+        buildConfigField("String", "ACCESS_TOKEN", "\"${properties.getProperty("access_token")}\"")
+        buildConfigField("String", "REFRESH_TOKEN", "\"${properties.getProperty("refresh_token")}\"")
+        buildConfigField("String", "BASE_URL","\"https://freesound.org/apiv2/\"")
     }
 
     buildTypes {
