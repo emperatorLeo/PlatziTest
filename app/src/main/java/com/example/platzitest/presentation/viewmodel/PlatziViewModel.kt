@@ -2,7 +2,7 @@ package com.example.platzitest.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.platzitest.usecase.SearchUseCase
+import com.example.platzitest.domain.usecase.SearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

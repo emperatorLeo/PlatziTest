@@ -1,7 +1,7 @@
 package com.example.platzitest.di
 
 import com.example.platzitest.presentation.viewmodel.PlatziViewModel
-import com.example.platzitest.usecase.SearchUseCase
+import com.example.platzitest.domain.usecase.SearchUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
