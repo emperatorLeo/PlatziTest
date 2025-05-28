@@ -5,4 +5,9 @@ plugins {
     alias(libs.plugins.kotlin.compose) apply false
     alias(libs.plugins.hilt.android) apply false
     alias(libs.plugins.ksp.android) apply false
+    alias(libs.plugins.ktlin)
+}
+
+ktlint {
+    version.set("0.49.1")
 }

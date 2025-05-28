@@ -4,6 +4,7 @@ gsonVersion = "2.11.0"
 hiltAndroid = "2.56.2"
 hiltNavigationVersion = "1.2.0"
 ksp = "2.0.21-1.0.27"
+ktlinVersion = "11.6.1"
 kotlin = "2.0.21"
 okhttpVersion = "4.12.0"
 retrofitVersion = "2.11.0"
@@ -49,3 +50,4 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" }
 ksp-android = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+ktlin = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlinVersion" }
