@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.example.platzitest.common.DATA_BASE_NAME
 import com.example.platzitest.data.local.dbdatasource.PlatziDatabase
+import com.example.platzitest.data.local.services.LocalServices
+import com.example.platzitest.data.local.services.LocalServicesImp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,6 +21,11 @@ object DBModule {
     @Provides
     fun provideDatabase(@ApplicationContext appContext: Context): PlatziDatabase {
         return Room.databaseBuilder(appContext, PlatziDatabase::class.java, DATA_BASE_NAME).build()
+    }
+    
+    @Provides
+    fun provideLocalServices(db: PlatziDatabase): LocalServices {
+        return LocalServicesImp(db)
     }
 
 }
