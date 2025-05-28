@@ -12,8 +12,11 @@ class PlatziViewModel @Inject constructor(private val searchUseCase: SearchUseCa
 
     fun searchSound(query: String) {
         viewModelScope.launch {
-           val response = searchUseCase(query)
-            println(response)
+            searchUseCase(query).collect {
+                if (it.isSuccessful) {
+                    println(it)
+                }
+            }
         }
     }
 }

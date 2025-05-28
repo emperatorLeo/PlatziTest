@@ -1,6 +1,7 @@
 package com.example.platzitest.di
 
 import com.example.platzitest.BuildConfig.BASE_URL
+import com.example.platzitest.data.local.services.LocalServices
 import com.example.platzitest.data.remote.apidatasource.ApiDataSource
 import com.example.platzitest.data.remote.apidatasource.ApiDataSourceImp
 import com.example.platzitest.data.remote.services.SoundService
@@ -15,7 +16,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [DBModule::class])
 @InstallIn(SingletonComponent::class)
 object ApiModule {
 
@@ -47,7 +48,7 @@ object ApiModule {
     }
 
     @Provides
-    fun provideRepository(apiDataSource: ApiDataSource): Repository {
-        return RepositoryImp(apiDataSource)
+    fun provideRepository(apiDataSource: ApiDataSource, localServices: LocalServices): Repository {
+        return RepositoryImp(apiDataSource, localServices)
     }
 }

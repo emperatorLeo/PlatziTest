@@ -14,6 +14,6 @@ interface PlatziDao {
     suspend fun insertSound(soundList: List<SoundEntity>)
 
     @Query("SELECT * FROM $SOUND_TABLE")
-    suspend fun getSounds(): Flow<List<SoundEntity>>
+    fun getSounds(): Flow<List<SoundEntity>>
 
 }
