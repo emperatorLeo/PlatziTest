@@ -1,9 +1,9 @@
 package com.example.platzitest.di
 
 import com.example.platzitest.BuildConfig.BASE_URL
-import com.example.platzitest.data.apidatasource.ApiDataSource
-import com.example.platzitest.data.apidatasource.ApiDataSourceImp
-import com.example.platzitest.data.remote.SoundService
+import com.example.platzitest.data.remote.apidatasource.ApiDataSource
+import com.example.platzitest.data.remote.apidatasource.ApiDataSourceImp
+import com.example.platzitest.data.remote.services.SoundService
 import com.example.platzitest.data.repository.Repository
 import com.example.platzitest.data.repository.RepositoryImp
 import dagger.Module

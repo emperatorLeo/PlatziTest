@@ -68,6 +68,12 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.gson.converter)
 
+    // Room
+    implementation(libs.room)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
+    annotationProcessor(libs.room.compiler)
+
     // Okhttp
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)

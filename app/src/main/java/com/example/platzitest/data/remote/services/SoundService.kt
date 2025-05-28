@@ -1,4 +1,4 @@
-package com.example.platzitest.data.remote
+package com.example.platzitest.data.remote.services
 
 import com.example.platzitest.data.model.responses.SoundResponse
 import retrofit2.Response

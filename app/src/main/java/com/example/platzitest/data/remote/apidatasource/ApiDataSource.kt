@@ -1,4 +1,4 @@
-package com.example.platzitest.data.apidatasource
+package com.example.platzitest.data.remote.apidatasource
 
 import com.example.platzitest.data.model.responses.SoundResponse
 import kotlinx.coroutines.flow.Flow
