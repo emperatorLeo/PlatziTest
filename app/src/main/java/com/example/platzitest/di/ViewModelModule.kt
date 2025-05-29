@@ -1,5 +1,6 @@
 package com.example.platzitest.di
 
+import com.example.platzitest.domain.usecase.ReadUseCase
 import com.example.platzitest.presentation.viewmodel.PlatziViewModel
 import com.example.platzitest.domain.usecase.SearchUseCase
 import dagger.Module
@@ -12,7 +13,10 @@ import dagger.hilt.android.components.ViewModelComponent
 object ViewModelModule {
 
     @Provides
-    fun providePlatziViewModel(searchUseCase: SearchUseCase): PlatziViewModel {
-        return PlatziViewModel(searchUseCase)
+    fun providePlatziViewModel(
+        readUseCase: ReadUseCase,
+        searchUseCase: SearchUseCase
+    ): PlatziViewModel {
+        return PlatziViewModel(readUseCase, searchUseCase)
     }
 }

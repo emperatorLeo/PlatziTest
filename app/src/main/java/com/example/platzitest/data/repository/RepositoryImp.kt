@@ -19,14 +19,19 @@ class RepositoryImp(
                     it.body()?.results?.map { soundItem -> soundItem.fromResponseToEntity() }
 
                 localServices.insertSound(listEntity ?: emptyList())
-
-                localServices.getSounds().collect { list ->
-                    val listDto = list.map { soundEntity -> soundEntity.fromEntityToDto() }
-                    emit(Response.success(listDto))
+                getFromDataBase().collect{ list ->
+                    emit(Response.success(list))
                 }
             } else {
                 emit(error(it.code(), it.errorBody()!!))
             }
+        }
+    }
+
+    override suspend fun getFromDataBase() = flow {
+        localServices.getSounds().collect { list ->
+            val listDto = list.map { soundEntity -> soundEntity.fromEntityToDto() }
+            emit(listDto)
         }
     }
 }

@@ -6,4 +6,5 @@ import retrofit2.Response
 
 interface Repository {
     suspend fun getSearch(query: String): Flow<Response<List<SoundDto>>>
+    suspend fun getFromDataBase(): Flow<List<SoundDto>>
 }
