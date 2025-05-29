@@ -16,11 +16,11 @@ fun AppNavigation(
     navController: NavHostController = rememberNavController(),
     viewModel: PlatziViewModel = hiltViewModel()
 ) {
-    viewModel.searchSound("piano")
-
     NavHost(navController, startDestination = MAIN_SCREEN) {
         composable(MAIN_SCREEN) {
-            MainScreen(viewModel.uiState.collectAsState())
+            MainScreen(viewModel.uiState.collectAsState()) {
+                viewModel.searchSound(it)
+            }
         }
     }
 }

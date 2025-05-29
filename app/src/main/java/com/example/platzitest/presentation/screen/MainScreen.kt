@@ -24,15 +24,16 @@ import com.example.platzitest.presentation.component.SoundItem
 import com.example.platzitest.presentation.theme.LightBlue
 
 @Composable
-fun MainScreen(uiState: State<List<SoundDto>>) {
+fun MainScreen(uiState: State<List<SoundDto>>, search: (String) -> Unit) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         floatingActionButton = {
-            FloatingActionButton(onClick = {
-                Log.d("Leo", "click on addItem")
-            }, modifier = Modifier.size(40.dp),
+            FloatingActionButton(
+                onClick = {
+                    Log.d("Leo", "click on addItem")
+                }, modifier = Modifier.size(40.dp),
                 shape = CircleShape,
-               containerColor = LightBlue,
+                containerColor = LightBlue,
                 contentColor = Color.White
             ) {
                 Icon(Icons.Filled.Add, "")
@@ -44,10 +45,9 @@ fun MainScreen(uiState: State<List<SoundDto>>) {
         LazyColumn(Modifier.padding(innerPadding)) {
 
             item {
-                SearchBarComponent(
-                    enabled = true,
-                    text = ""
-                )
+                SearchBarComponent {
+                   search(it)
+                }
             }
 
             items(uiState.value) {

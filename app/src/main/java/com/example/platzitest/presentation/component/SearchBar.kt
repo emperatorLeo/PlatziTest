@@ -1,6 +1,7 @@
 package com.example.platzitest.presentation.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -10,6 +11,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
@@ -26,23 +31,26 @@ import com.example.platzitest.presentation.theme.LightBlue
 @Composable
 fun SearchBarComponent(
     modifier: Modifier = Modifier,
-    enabled: Boolean,
-    text: String,
     search: (String) -> Unit = {}
 ) {
+    var text by remember { mutableStateOf(EMPTY_STRING) }
+
     Row(
         modifier = modifier
             .fillMaxWidth()
             .background(Color.LightGray)
     ) {
         Icon(
-            modifier = Modifier.padding(Dimen10dp),
+            modifier = Modifier.padding(Dimen10dp).clickable {
+                search(text)
+            },
             imageVector = Icons.Rounded.Search,
             tint = LightBlue,
             contentDescription = EMPTY_STRING
         )
-        TextField(enabled = enabled, value = text, onValueChange = { input ->
-            search(input)
+
+        TextField( value = text, onValueChange = { input ->
+            text = input
         }, label = {
             Text(
                 stringResource(R.string.search_sound),
