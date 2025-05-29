@@ -2,7 +2,9 @@ package com.example.platzitest.data.local.services
 
 import com.example.platzitest.data.local.dbdatasource.PlatziDatabase
 import com.example.platzitest.data.model.entities.SoundEntity
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
 
 class LocalServicesImp(db: PlatziDatabase) : LocalServices {
 
@@ -10,6 +12,12 @@ class LocalServicesImp(db: PlatziDatabase) : LocalServices {
 
     override suspend fun insertSound(soundList: List<SoundEntity>) {
         dao.insertSound(soundList)
+    }
+
+    override suspend fun updateSound(sound: SoundEntity) {
+        withContext(Dispatchers.IO) {
+            dao.updateSound(sound)
+        }
     }
 
     override suspend fun getSounds() = flow {

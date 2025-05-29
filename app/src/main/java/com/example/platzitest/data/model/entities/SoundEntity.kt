@@ -11,7 +11,7 @@ data class SoundEntity(
     val id: Int,
     val name: String,
     val userName: String,
-    val like: Boolean = false
+    val isFavorite: Boolean = false
 ) {
     fun fromEntityToDto(): SoundDto {
         this.apply {
@@ -19,7 +19,7 @@ data class SoundEntity(
                 id = this.id,
                 name = this.name,
                 username = this.userName,
-                like = this.like
+                like = this.isFavorite
             )
         }
     }

@@ -15,17 +15,24 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.platzitest.domain.dtos.SoundDto
@@ -37,7 +44,32 @@ import com.example.platzitest.presentation.theme.LightBlue
 import com.example.platzitest.presentation.theme.intenseRed
 
 @Composable
-fun SoundItem(sound: SoundDto, onSoundClick: (SoundDto) -> Unit, onLikeClick: (SoundDto) -> Unit) {
+fun SoundItem(sound: SoundDto, onSoundClick: (SoundDto) -> Unit, saveChanges: (SoundDto) -> Unit) {
+    var isEditionMode by remember { mutableStateOf(false) }
+    var innerSound by remember { mutableStateOf(sound) }
+
+    if (!isEditionMode) {
+        ItemReadMode(innerSound, onSoundClick, {
+            isEditionMode = !isEditionMode
+        }) {
+            saveChanges(it)
+        }
+    } else {
+        ItemEditionMode(sound){
+            innerSound = it
+            saveChanges(innerSound)
+            isEditionMode = !isEditionMode
+        }
+    }
+}
+
+@Composable
+private fun ItemReadMode(
+    sound: SoundDto,
+    onSoundClick: (SoundDto) -> Unit,
+    edition: () -> Unit,
+    saveChanges: (SoundDto) -> Unit
+) {
     var innerLike by remember { mutableStateOf(sound.like) }
 
     Column(
@@ -88,7 +120,7 @@ fun SoundItem(sound: SoundDto, onSoundClick: (SoundDto) -> Unit, onLikeClick: (S
                     .size(40.dp)
                     .clickable {
                         innerLike = !innerLike
-                        onLikeClick(sound)
+                        saveChanges(sound.copy(like = innerLike))
                     }
             )
 
@@ -101,7 +133,120 @@ fun SoundItem(sound: SoundDto, onSoundClick: (SoundDto) -> Unit, onLikeClick: (S
                     .padding(end = Dimen5dp)
                     .size(40.dp)
                     .clickable {
+                        edition()
+                    }
+            )
 
+            Image(
+                imageVector = Icons.Filled.Delete,
+                "",
+                colorFilter = ColorFilter.tint(intenseRed),
+                modifier = Modifier
+                    .align(Alignment.CenterVertically)
+                    .size(40.dp)
+                    .clickable {
+
+                    }
+            )
+        }
+        HorizontalDivider()
+    }
+}
+
+@Composable
+private fun ItemEditionMode(
+    sound: SoundDto,
+    saveChanges: (SoundDto) -> Unit
+) {
+    var innerLike by remember { mutableStateOf(sound.like) }
+    var innerName by remember { mutableStateOf(sound.name) }
+    var innerAuthor by remember { mutableStateOf(sound.username) }
+    val focusRequester = remember { FocusRequester() }
+
+    LaunchedEffect(Unit) {
+        focusRequester.requestFocus()
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = Dimen5dp, end = Dimen5dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .background(Color.White)
+        ) {
+            Column(
+                modifier = Modifier
+                    .width(width = 230.dp)
+                    .wrapContentHeight()
+            ) {
+
+                Text(
+                    modifier = Modifier.padding(top = Dimen5dp),
+                    text = "ID: ${sound.id}",
+                    color = LightBlue,
+                    fontSize = Font10sp
+                )
+
+                TextField(
+                    innerName,
+                    onValueChange = {
+                        innerName = it
+                    },
+                    colors = TextFieldDefaults.colors(
+                        focusedContainerColor = Color.White,
+                        focusedTextColor = Color.Black
+                    ),
+                    textStyle = TextStyle(fontSize = Font15sp, fontWeight = FontWeight.Bold),
+                    modifier = Modifier.focusRequester(focusRequester)
+                )
+
+                TextField(
+                    innerAuthor,
+                    onValueChange = {
+                        innerAuthor = it
+                    },
+                    colors = TextFieldDefaults.colors(
+                        focusedContainerColor = Color.White,
+                        focusedTextColor = Color.Black
+                    ),
+                    textStyle = TextStyle(fontSize = Font12sp)
+                )
+            }
+
+            Image(
+                imageVector = if (innerLike) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
+                "",
+                colorFilter = ColorFilter.tint(if (innerLike) Color.Red else Color.Black),
+                modifier = Modifier
+                    .align(Alignment.CenterVertically)
+                    .padding(end = Dimen5dp)
+                    .size(40.dp)
+                    .clickable {
+                        innerLike = !innerLike
+                        saveChanges(sound.copy(like = innerLike))
+                    }
+            )
+
+            Image(
+                imageVector = Icons.Rounded.CheckCircle,
+                "",
+                colorFilter = ColorFilter.tint(LightBlue),
+                modifier = Modifier
+                    .align(Alignment.CenterVertically)
+                    .padding(end = Dimen5dp)
+                    .size(40.dp)
+                    .clickable {
+                        saveChanges(
+                            sound.copy(
+                                name = innerName,
+                                username = innerAuthor,
+                                like = innerLike
+                            )
+                        )
                     }
             )
 

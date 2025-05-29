@@ -9,7 +9,7 @@ data class SoundDto(val id: Int, val name: String, val username: String, var lik
                 id = this.id,
                 name = this.name,
                 userName = this.username,
-                like = this.like
+                isFavorite = this.like
             )
         }
     }

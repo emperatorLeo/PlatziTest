@@ -3,6 +3,7 @@ package com.example.platzitest.di
 import com.example.platzitest.domain.usecase.ReadUseCase
 import com.example.platzitest.presentation.viewmodel.PlatziViewModel
 import com.example.platzitest.domain.usecase.SearchUseCase
+import com.example.platzitest.domain.usecase.UpdateUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,8 +16,9 @@ object ViewModelModule {
     @Provides
     fun providePlatziViewModel(
         readUseCase: ReadUseCase,
-        searchUseCase: SearchUseCase
+        searchUseCase: SearchUseCase,
+        updateUseCase: UpdateUseCase
     ): PlatziViewModel {
-        return PlatziViewModel(readUseCase, searchUseCase)
+        return PlatziViewModel(readUseCase, searchUseCase, updateUseCase)
     }
 }

@@ -28,6 +28,10 @@ class RepositoryImp(
         }
     }
 
+    override suspend fun updateSound(sound: SoundDto) {
+        localServices.updateSound(sound.fromDtoToEntity())
+    }
+
     override suspend fun getFromDataBase() = flow {
         localServices.getSounds().collect { list ->
             val listDto = list.map { soundEntity -> soundEntity.fromEntityToDto() }

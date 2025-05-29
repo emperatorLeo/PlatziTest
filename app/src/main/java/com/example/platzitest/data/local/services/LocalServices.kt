@@ -7,6 +7,8 @@ interface LocalServices {
 
     suspend fun insertSound(soundList: List<SoundEntity>)
 
+    suspend fun updateSound(sound: SoundEntity)
+
     suspend fun getSounds(): Flow<List<SoundEntity>>
 
 }

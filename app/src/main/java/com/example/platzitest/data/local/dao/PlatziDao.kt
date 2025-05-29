@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.platzitest.common.SOUND_TABLE
 import com.example.platzitest.data.model.entities.SoundEntity
 import kotlinx.coroutines.flow.Flow
@@ -14,7 +15,9 @@ interface PlatziDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSound(soundList: List<SoundEntity>)
 
+    @Update
+    fun updateSound(sound: SoundEntity)
+
     @Query("SELECT * FROM $SOUND_TABLE")
     fun getSounds(): Flow<List<SoundEntity>>
-
 }

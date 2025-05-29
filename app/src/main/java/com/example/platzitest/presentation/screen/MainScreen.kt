@@ -24,7 +24,11 @@ import com.example.platzitest.presentation.component.SoundItem
 import com.example.platzitest.presentation.theme.LightBlue
 
 @Composable
-fun MainScreen(uiState: State<List<SoundDto>>, search: (String) -> Unit) {
+fun MainScreen(
+    uiState: State<List<SoundDto>>,
+    onItemSaved: (SoundDto) -> Unit,
+    search: (String) -> Unit
+) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         floatingActionButton = {
@@ -46,16 +50,16 @@ fun MainScreen(uiState: State<List<SoundDto>>, search: (String) -> Unit) {
 
             item {
                 SearchBarComponent {
-                   search(it)
+                    search(it)
                 }
             }
 
             items(uiState.value) {
                 SoundItem(sound = it, {
                     Log.d("Leo", "click on item")
-                }) {
-                    Log.d("Leo", "click on heart")
-                }
+                }, { saved ->
+                    onItemSaved(saved)
+                })
             }
         }
     }

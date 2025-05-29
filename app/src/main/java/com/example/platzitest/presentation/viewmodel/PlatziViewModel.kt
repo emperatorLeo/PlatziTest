@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.platzitest.domain.dtos.SoundDto
 import com.example.platzitest.domain.usecase.ReadUseCase
 import com.example.platzitest.domain.usecase.SearchUseCase
+import com.example.platzitest.domain.usecase.UpdateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class PlatziViewModel @Inject constructor(
     private val readUseCase: ReadUseCase,
-    private val searchUseCase: SearchUseCase
+    private val searchUseCase: SearchUseCase,
+    private val updateUseCase: UpdateUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<List<SoundDto>>(emptyList())
@@ -36,6 +38,12 @@ class PlatziViewModel @Inject constructor(
                     _uiState.value = it.body() ?: emptyList()
                 }
             }
+        }
+    }
+
+    fun updateSound(soundDto: SoundDto) {
+        viewModelScope.launch {
+            updateUseCase(soundDto)
         }
     }
 }
