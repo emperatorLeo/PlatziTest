@@ -1,0 +1,122 @@
+package com.example.platzitest.presentation.component
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import com.example.platzitest.domain.dtos.SoundDto
+import com.example.platzitest.presentation.theme.Dimen5dp
+import com.example.platzitest.presentation.theme.Font10sp
+import com.example.platzitest.presentation.theme.Font12sp
+import com.example.platzitest.presentation.theme.Font15sp
+import com.example.platzitest.presentation.theme.LightBlue
+import com.example.platzitest.presentation.theme.intenseRed
+
+@Composable
+fun SoundItem(sound: SoundDto, onSoundClick: (SoundDto) -> Unit, onLikeClick: (SoundDto) -> Unit) {
+    var innerLike by remember { mutableStateOf(sound.like) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = Dimen5dp, end = Dimen5dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .background(Color.White)
+        ) {
+            Column(
+                modifier = Modifier
+                    .width(width = 230.dp)
+                    .wrapContentHeight()
+                    .clickable { onSoundClick(sound) }) {
+
+                Text(
+                    modifier = Modifier.padding(top = Dimen5dp),
+                    text = "ID: ${sound.id}",
+                    color = LightBlue,
+                    fontSize = Font10sp
+                )
+
+                Text(
+                    text = sound.name,
+                    color = Color.Black,
+                    fontSize = Font15sp,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Text(
+                    text = "Author: ${sound.username}",
+                    color = Color.Black,
+                    fontSize = Font12sp
+                )
+            }
+
+            Image(
+                imageVector = if (innerLike) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
+                "",
+                colorFilter = ColorFilter.tint(if (innerLike) Color.Red else Color.Black),
+                modifier = Modifier
+                    .align(Alignment.CenterVertically)
+                    .padding(end = Dimen5dp)
+                    .size(40.dp)
+                    .clickable {
+                        innerLike = !innerLike
+                        onLikeClick(sound)
+                    }
+            )
+
+            Image(
+                imageVector = Icons.Filled.Edit,
+                "",
+                colorFilter = ColorFilter.tint(LightBlue),
+                modifier = Modifier
+                    .align(Alignment.CenterVertically)
+                    .padding(end = Dimen5dp)
+                    .size(40.dp)
+                    .clickable {
+
+                    }
+            )
+
+            Image(
+                imageVector = Icons.Filled.Delete,
+                "",
+                colorFilter = ColorFilter.tint(intenseRed),
+                modifier = Modifier
+                    .align(Alignment.CenterVertically)
+                    .size(40.dp)
+                    .clickable {
+
+                    }
+            )
+        }
+        HorizontalDivider()
+    }
+}

@@ -1,7 +1,7 @@
 package com.example.platzitest.presentation.navigation
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -20,7 +20,7 @@ fun AppNavigation(
 
     NavHost(navController, startDestination = MAIN_SCREEN) {
         composable(MAIN_SCREEN) {
-            MainScreen()
+            MainScreen(viewModel.uiState.collectAsState())
         }
     }
 }

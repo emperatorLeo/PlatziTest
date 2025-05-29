@@ -21,6 +21,7 @@ import com.example.platzitest.common.EMPTY_STRING
 import com.example.platzitest.presentation.testing.SEARCH_BAR_TEST_TAG
 import com.example.platzitest.presentation.theme.Dimen10dp
 import com.example.platzitest.presentation.theme.Font12sp
+import com.example.platzitest.presentation.theme.LightBlue
 
 @Composable
 fun SearchBarComponent(
@@ -37,7 +38,7 @@ fun SearchBarComponent(
         Icon(
             modifier = Modifier.padding(Dimen10dp),
             imageVector = Icons.Rounded.Search,
-            tint = Color.Magenta,
+            tint = LightBlue,
             contentDescription = EMPTY_STRING
         )
         TextField(enabled = enabled, value = text, onValueChange = { input ->

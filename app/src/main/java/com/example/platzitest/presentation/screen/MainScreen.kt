@@ -1,23 +1,62 @@
 package com.example.platzitest.presentation.screen
 
-import androidx.compose.foundation.layout.Column
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import com.example.platzitest.domain.dtos.SoundDto
 import com.example.platzitest.presentation.component.SearchBarComponent
+import com.example.platzitest.presentation.component.SoundItem
+import com.example.platzitest.presentation.theme.LightBlue
 
 @Composable
-fun MainScreen() {
-    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-        Column(Modifier.padding(innerPadding)) {
-            SearchBarComponent(
-                modifier = Modifier
-                    .padding(innerPadding),
-                enabled = true,
-                text = ""
-            )
+fun MainScreen(uiState: State<List<SoundDto>>) {
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        floatingActionButton = {
+            FloatingActionButton(onClick = {
+                Log.d("Leo", "click on addItem")
+            }, modifier = Modifier.size(40.dp),
+                shape = CircleShape,
+               containerColor = LightBlue,
+                contentColor = Color.White
+            ) {
+                Icon(Icons.Filled.Add, "")
+            }
+        },
+        floatingActionButtonPosition = FabPosition.Center
+    ) { innerPadding ->
+
+        LazyColumn(Modifier.padding(innerPadding)) {
+
+            item {
+                SearchBarComponent(
+                    enabled = true,
+                    text = ""
+                )
+            }
+
+            items(uiState.value) {
+                SoundItem(sound = it, {
+                    Log.d("Leo", "click on item")
+                }) {
+                    Log.d("Leo", "click on heart")
+                }
+            }
         }
     }
 }
