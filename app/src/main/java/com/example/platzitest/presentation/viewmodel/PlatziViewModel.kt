@@ -8,6 +8,7 @@ import com.example.platzitest.domain.usecase.InsertUseCase
 import com.example.platzitest.domain.usecase.ReadUseCase
 import com.example.platzitest.domain.usecase.SearchUseCase
 import com.example.platzitest.domain.usecase.UpdateUseCase
+import com.example.platzitest.presentation.state.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,22 +26,23 @@ class PlatziViewModel @Inject constructor(
     private val insertUseCase: InsertUseCase
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<List<SoundDto>>(emptyList())
-    val uiState: StateFlow<List<SoundDto>> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow<UiState>(UiState.Idle)
+    val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
     fun readFromDatabase() {
         viewModelScope.launch {
             readUseCase().collect {
-                _uiState.value = it
+                _uiState.value = UiState.Success(it)
             }
         }
     }
 
     fun searchSound(query: String) {
+        _uiState.value = UiState.Loading
         viewModelScope.launch {
             searchUseCase(query).collect {
                 if (it.isSuccessful) {
-                    _uiState.value = it.body() ?: emptyList()
+                    _uiState.value = UiState.Success(it.body() ?: emptyList())
                 }
             }
         }
@@ -53,22 +55,22 @@ class PlatziViewModel @Inject constructor(
     }
 
     fun deleteSound(soundDto: SoundDto) {
+        _uiState.value = UiState.Loading
         viewModelScope.launch {
             deleteUseCase(soundDto).collect {
-                _uiState.value = it
+                _uiState.value = UiState.Success(it)
             }
         }
     }
 
     fun insertSound() {
+        _uiState.value = UiState.Loading
         val newSound =
-            SoundDto(id = Random.nextInt(), name = "New Sound", username = "New user", like = false)
+            SoundDto(id = Random.nextInt(1000), name = "New Sound", username = "New user", like = false)
         val newList = mutableListOf(newSound)
-        _uiState.value = emptyList()
         viewModelScope.launch {
             insertUseCase(newSound).collect {
-                newList.addAll(it)
-                _uiState.value = newList
+                _uiState.value = UiState.Success(newList)
             }
         }
     }
