@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PlatziTest</string>
+    <string name="search_sound">Introduce una sonido a buscar como Piano,Violin</string>
 </resources>

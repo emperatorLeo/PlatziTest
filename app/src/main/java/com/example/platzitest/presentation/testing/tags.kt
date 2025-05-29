@@ -1,3 +1,3 @@
 package com.example.platzitest.presentation.testing
 
-const val GREETING_TEST_TAG = "GREETING_TAG"
+const val SEARCH_BAR_TEST_TAG = "SEARCH_BAR_TEST_TAG"
