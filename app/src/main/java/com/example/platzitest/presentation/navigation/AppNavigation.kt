@@ -24,6 +24,7 @@ fun AppNavigation(
                 viewModel.uiState.collectAsState(),
                 viewModel::updateSound,
                 viewModel::deleteSound,
+                viewModel::insertSound,
                 viewModel::searchSound
             )
         }

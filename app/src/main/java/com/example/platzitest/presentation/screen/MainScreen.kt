@@ -28,15 +28,14 @@ fun MainScreen(
     uiState: State<List<SoundDto>>,
     onItemSaved: (SoundDto) -> Unit,
     onDeleteItem: (SoundDto) -> Unit,
+    onAddItem: () -> Unit,
     search: (String) -> Unit
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         floatingActionButton = {
             FloatingActionButton(
-                onClick = {
-                    Log.d("Leo", "click on addItem")
-                }, modifier = Modifier.size(40.dp),
+                onClick = onAddItem, modifier = Modifier.size(40.dp),
                 shape = CircleShape,
                 containerColor = LightBlue,
                 contentColor = Color.White

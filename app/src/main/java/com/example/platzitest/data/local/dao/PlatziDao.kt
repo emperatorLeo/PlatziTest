@@ -14,7 +14,10 @@ import kotlinx.coroutines.flow.Flow
 interface PlatziDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSound(soundList: List<SoundEntity>)
+    suspend fun feedDataBase(soundList: List<SoundEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSound(sound: SoundEntity)
 
     @Update
     fun updateSound(sound: SoundEntity)

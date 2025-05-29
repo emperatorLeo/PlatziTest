@@ -10,8 +10,16 @@ class LocalServicesImp(db: PlatziDatabase) : LocalServices {
 
     private val dao = db.platziDao()
 
-    override suspend fun insertSound(soundList: List<SoundEntity>) {
-        dao.insertSound(soundList)
+    override suspend fun feedDatabase(soundList: List<SoundEntity>) {
+        withContext(Dispatchers.IO) {
+            dao.feedDataBase(soundList)
+        }
+    }
+
+    override suspend fun insertSound(sound: SoundEntity) {
+        withContext(Dispatchers.IO) {
+            dao.insertSound(sound)
+        }
     }
 
     override suspend fun updateSound(sound: SoundEntity) {
@@ -27,7 +35,7 @@ class LocalServicesImp(db: PlatziDatabase) : LocalServices {
     }
 
     override suspend fun deleteSound(sound: SoundEntity) {
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             dao.deleteSound(sound)
         }
     }

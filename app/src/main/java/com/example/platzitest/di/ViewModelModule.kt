@@ -1,6 +1,7 @@
 package com.example.platzitest.di
 
 import com.example.platzitest.domain.usecase.DeleteUseCase
+import com.example.platzitest.domain.usecase.InsertUseCase
 import com.example.platzitest.domain.usecase.ReadUseCase
 import com.example.platzitest.presentation.viewmodel.PlatziViewModel
 import com.example.platzitest.domain.usecase.SearchUseCase
@@ -19,8 +20,9 @@ object ViewModelModule {
         readUseCase: ReadUseCase,
         searchUseCase: SearchUseCase,
         updateUseCase: UpdateUseCase,
-        deleteUseCase: DeleteUseCase
+        deleteUseCase: DeleteUseCase,
+        insertUseCase: InsertUseCase
     ): PlatziViewModel {
-        return PlatziViewModel(readUseCase, searchUseCase, updateUseCase, deleteUseCase)
+        return PlatziViewModel(readUseCase, searchUseCase, updateUseCase, deleteUseCase, insertUseCase)
     }
 }

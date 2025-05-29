@@ -5,7 +5,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocalServices {
 
-    suspend fun insertSound(soundList: List<SoundEntity>)
+    suspend fun feedDatabase(soundList: List<SoundEntity>)
+
+    suspend fun insertSound(sound: SoundEntity)
 
     suspend fun updateSound(sound: SoundEntity)
 

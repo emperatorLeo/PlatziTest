@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.platzitest.domain.dtos.SoundDto
 import com.example.platzitest.domain.usecase.DeleteUseCase
+import com.example.platzitest.domain.usecase.InsertUseCase
 import com.example.platzitest.domain.usecase.ReadUseCase
 import com.example.platzitest.domain.usecase.SearchUseCase
 import com.example.platzitest.domain.usecase.UpdateUseCase
@@ -13,13 +14,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
 class PlatziViewModel @Inject constructor(
     private val readUseCase: ReadUseCase,
     private val searchUseCase: SearchUseCase,
     private val updateUseCase: UpdateUseCase,
-    private val deleteUseCase: DeleteUseCase
+    private val deleteUseCase: DeleteUseCase,
+    private val insertUseCase: InsertUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<List<SoundDto>>(emptyList())
@@ -49,10 +52,23 @@ class PlatziViewModel @Inject constructor(
         }
     }
 
-    fun deleteSound(soundDto: SoundDto){
+    fun deleteSound(soundDto: SoundDto) {
         viewModelScope.launch {
-            deleteUseCase(soundDto).collect{
+            deleteUseCase(soundDto).collect {
                 _uiState.value = it
+            }
+        }
+    }
+
+    fun insertSound() {
+        val newSound =
+            SoundDto(id = Random.nextInt(), name = "New Sound", username = "New user", like = false)
+        val newList = mutableListOf(newSound)
+        _uiState.value = emptyList()
+        viewModelScope.launch {
+            insertUseCase(newSound).collect {
+                newList.addAll(it)
+                _uiState.value = newList
             }
         }
     }
