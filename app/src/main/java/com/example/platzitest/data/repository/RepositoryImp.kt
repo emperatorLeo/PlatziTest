@@ -19,7 +19,7 @@ class RepositoryImp(
                     it.body()?.results?.map { soundItem -> soundItem.fromResponseToEntity() }
 
                 localServices.insertSound(listEntity ?: emptyList())
-                getFromDataBase().collect{ list ->
+                getFromDataBase().collect { list ->
                     emit(Response.success(list))
                 }
             } else {
@@ -36,6 +36,13 @@ class RepositoryImp(
         localServices.getSounds().collect { list ->
             val listDto = list.map { soundEntity -> soundEntity.fromEntityToDto() }
             emit(listDto)
+        }
+    }
+
+    override suspend fun deleteSound(sound: SoundDto) = flow {
+        localServices.deleteSound(sound.fromDtoToEntity())
+        getFromDataBase().collect{
+            emit(it)
         }
     }
 }

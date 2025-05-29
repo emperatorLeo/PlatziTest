@@ -1,6 +1,7 @@
 package com.example.platzitest.data.local.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -20,4 +21,7 @@ interface PlatziDao {
 
     @Query("SELECT * FROM $SOUND_TABLE")
     fun getSounds(): Flow<List<SoundEntity>>
+
+    @Delete
+    suspend fun deleteSound(sound: SoundEntity)
 }

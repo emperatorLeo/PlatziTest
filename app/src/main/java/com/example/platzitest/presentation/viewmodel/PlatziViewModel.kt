@@ -3,6 +3,7 @@ package com.example.platzitest.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.platzitest.domain.dtos.SoundDto
+import com.example.platzitest.domain.usecase.DeleteUseCase
 import com.example.platzitest.domain.usecase.ReadUseCase
 import com.example.platzitest.domain.usecase.SearchUseCase
 import com.example.platzitest.domain.usecase.UpdateUseCase
@@ -17,7 +18,8 @@ import javax.inject.Inject
 class PlatziViewModel @Inject constructor(
     private val readUseCase: ReadUseCase,
     private val searchUseCase: SearchUseCase,
-    private val updateUseCase: UpdateUseCase
+    private val updateUseCase: UpdateUseCase,
+    private val deleteUseCase: DeleteUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<List<SoundDto>>(emptyList())
@@ -44,6 +46,14 @@ class PlatziViewModel @Inject constructor(
     fun updateSound(soundDto: SoundDto) {
         viewModelScope.launch {
             updateUseCase(soundDto)
+        }
+    }
+
+    fun deleteSound(soundDto: SoundDto){
+        viewModelScope.launch {
+            deleteUseCase(soundDto).collect{
+                _uiState.value = it
+            }
         }
     }
 }

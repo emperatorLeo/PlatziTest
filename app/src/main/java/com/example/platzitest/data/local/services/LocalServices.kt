@@ -11,4 +11,6 @@ interface LocalServices {
 
     suspend fun getSounds(): Flow<List<SoundEntity>>
 
+    suspend fun deleteSound(sound: SoundEntity)
+
 }

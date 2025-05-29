@@ -44,18 +44,23 @@ import com.example.platzitest.presentation.theme.LightBlue
 import com.example.platzitest.presentation.theme.intenseRed
 
 @Composable
-fun SoundItem(sound: SoundDto, onSoundClick: (SoundDto) -> Unit, saveChanges: (SoundDto) -> Unit) {
+fun SoundItem(
+    sound: SoundDto,
+    onSoundClick: (SoundDto) -> Unit,
+    onDeleteItem: (SoundDto) -> Unit,
+    saveChanges: (SoundDto) -> Unit
+) {
     var isEditionMode by remember { mutableStateOf(false) }
     var innerSound by remember { mutableStateOf(sound) }
 
     if (!isEditionMode) {
         ItemReadMode(innerSound, onSoundClick, {
             isEditionMode = !isEditionMode
-        }) {
-            saveChanges(it)
+        }, onDeleteItem) {
+            saveChanges(innerSound)
         }
     } else {
-        ItemEditionMode(sound){
+        ItemEditionMode(sound, onDeleteItem) {
             innerSound = it
             saveChanges(innerSound)
             isEditionMode = !isEditionMode
@@ -68,6 +73,7 @@ private fun ItemReadMode(
     sound: SoundDto,
     onSoundClick: (SoundDto) -> Unit,
     edition: () -> Unit,
+    onDeleteItem: (SoundDto) -> Unit,
     saveChanges: (SoundDto) -> Unit
 ) {
     var innerLike by remember { mutableStateOf(sound.like) }
@@ -145,7 +151,7 @@ private fun ItemReadMode(
                     .align(Alignment.CenterVertically)
                     .size(40.dp)
                     .clickable {
-
+                        onDeleteItem(sound)
                     }
             )
         }
@@ -156,6 +162,7 @@ private fun ItemReadMode(
 @Composable
 private fun ItemEditionMode(
     sound: SoundDto,
+    onDeleteItem: (SoundDto) -> Unit,
     saveChanges: (SoundDto) -> Unit
 ) {
     var innerLike by remember { mutableStateOf(sound.like) }
@@ -258,7 +265,7 @@ private fun ItemEditionMode(
                     .align(Alignment.CenterVertically)
                     .size(40.dp)
                     .clickable {
-
+                        onDeleteItem(sound)
                     }
             )
         }

@@ -27,6 +27,7 @@ import com.example.platzitest.presentation.theme.LightBlue
 fun MainScreen(
     uiState: State<List<SoundDto>>,
     onItemSaved: (SoundDto) -> Unit,
+    onDeleteItem: (SoundDto) -> Unit,
     search: (String) -> Unit
 ) {
     Scaffold(
@@ -57,7 +58,7 @@ fun MainScreen(
             items(uiState.value) {
                 SoundItem(sound = it, {
                     Log.d("Leo", "click on item")
-                }, { saved ->
+                }, onDeleteItem, { saved ->
                     onItemSaved(saved)
                 })
             }

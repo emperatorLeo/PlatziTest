@@ -23,6 +23,7 @@ fun AppNavigation(
             MainScreen(
                 viewModel.uiState.collectAsState(),
                 viewModel::updateSound,
+                viewModel::deleteSound,
                 viewModel::searchSound
             )
         }

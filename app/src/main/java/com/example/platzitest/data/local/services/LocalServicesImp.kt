@@ -25,4 +25,10 @@ class LocalServicesImp(db: PlatziDatabase) : LocalServices {
             emit(it)
         }
     }
+
+    override suspend fun deleteSound(sound: SoundEntity) {
+        withContext(Dispatchers.IO){
+            dao.deleteSound(sound)
+        }
+    }
 }
