@@ -1,6 +1,5 @@
 package com.example.platzitest.presentation.screen
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -35,7 +34,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.lottiefiles.dotlottie.core.compose.runtime.DotLottieController
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
@@ -48,6 +46,7 @@ import com.example.platzitest.presentation.theme.DarkBlue
 import com.example.platzitest.presentation.theme.Dimen10dp
 import com.example.platzitest.presentation.theme.Font15sp
 import com.example.platzitest.presentation.theme.LightBlue
+import com.lottiefiles.dotlottie.core.compose.runtime.DotLottieController
 import com.lottiefiles.dotlottie.core.compose.ui.DotLottieAnimation
 import com.lottiefiles.dotlottie.core.util.DotLottieSource
 
@@ -102,10 +101,8 @@ fun SuccessDetailScreen(
     exoPlayer.addListener(object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
             if (isPlaying) {
-                Log.d("Leo", "is playing")
                 lottieController.play()
             } else {
-                Log.d("Leo", "is on pause")
                 lottieController.pause()
             }
         }

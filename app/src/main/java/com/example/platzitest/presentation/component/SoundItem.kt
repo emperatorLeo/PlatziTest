@@ -40,8 +40,8 @@ import com.example.platzitest.presentation.theme.Dimen5dp
 import com.example.platzitest.presentation.theme.Font10sp
 import com.example.platzitest.presentation.theme.Font12sp
 import com.example.platzitest.presentation.theme.Font15sp
-import com.example.platzitest.presentation.theme.LightBlue
 import com.example.platzitest.presentation.theme.IntenseRed
+import com.example.platzitest.presentation.theme.LightBlue
 
 @Composable
 fun SoundItem(
@@ -57,6 +57,7 @@ fun SoundItem(
         ItemReadMode(innerSound, onItemClick, {
             isEditionMode = !isEditionMode
         }, onDeleteItem) {
+            innerSound = it
             saveChanges(innerSound)
         }
     } else {
