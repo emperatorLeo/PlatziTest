@@ -18,10 +18,8 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,11 +35,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.lottiefiles.dotlottie.core.compose.runtime.DotLottieController
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.compose.LifecycleEventEffect
-import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
@@ -51,9 +46,10 @@ import com.example.platzitest.domain.dtos.SoundDetailsDto
 import com.example.platzitest.presentation.state.UiState
 import com.example.platzitest.presentation.theme.DarkBlue
 import com.example.platzitest.presentation.theme.Dimen10dp
-import com.example.platzitest.presentation.theme.Font12sp
 import com.example.platzitest.presentation.theme.Font15sp
 import com.example.platzitest.presentation.theme.LightBlue
+import com.lottiefiles.dotlottie.core.compose.ui.DotLottieAnimation
+import com.lottiefiles.dotlottie.core.util.DotLottieSource
 
 @Composable
 fun DetailScreen(uiState: State<UiState>, goBack: () -> Unit) {
@@ -61,16 +57,6 @@ fun DetailScreen(uiState: State<UiState>, goBack: () -> Unit) {
     val context = LocalContext.current
     val exoPlayer = ExoPlayer.Builder(context).build()
     var mediaSource by remember { mutableStateOf(MediaItem.fromUri(EXAMPLE_AUDIO_URI)) }
-
-    exoPlayer.addListener(object : Player.Listener {
-        override fun onIsPlayingChanged(isPlaying: Boolean) {
-            if (isPlaying) {
-                Log.d("Leo", "is playing")
-            } else {
-                Log.d("Leo", "is on pause")
-            }
-        }
-    })
 
     when (uiState.value) {
         is UiState.Loading -> {
@@ -111,6 +97,20 @@ fun SuccessDetailScreen(
     exoPlayer: ExoPlayer,
     goBack: () -> Unit
 ) {
+    val lottieController = remember{ DotLottieController() }
+
+    exoPlayer.addListener(object : Player.Listener {
+        override fun onIsPlayingChanged(isPlaying: Boolean) {
+            if (isPlaying) {
+                Log.d("Leo", "is playing")
+                lottieController.play()
+            } else {
+                Log.d("Leo", "is on pause")
+                lottieController.pause()
+            }
+        }
+    })
+
     Column(
         Modifier
             .fillMaxSize()
@@ -170,7 +170,13 @@ fun SuccessDetailScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp)
-                .padding(start = Dimen10dp, end = Dimen10dp)
+                .padding(start = Dimen10dp, end = Dimen10dp, bottom = 20.dp)
+        )
+
+        DotLottieAnimation(
+            source = DotLottieSource.Url("https://lottie.host/52b78870-4b70-46a5-b4f8-b6aed5225c14/rui8qZZLyK.lottie"),
+            autoplay = false,
+            controller = lottieController
         )
     }
 }

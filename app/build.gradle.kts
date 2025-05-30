@@ -71,10 +71,13 @@ dependencies {
     // Gson
     implementation(libs.gson)
 
-    //Hilt
+    // Hilt
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation)
     ksp(libs.hilt.android.compiler)
+
+    // Lottie
+    implementation(libs.dotlottie.android)
 
     // Media3
     implementation(libs.media3.session)
