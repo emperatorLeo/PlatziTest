@@ -62,9 +62,11 @@ fun MainScreen(
                 }
             }
             when (uiState.value) {
-                is UiState.Success -> {
-                    items((uiState.value as UiState.Success).listSound) {
-                        SoundItem(sound = it, { id ->
+                is UiState.Success<*> -> {
+                    val items = (uiState.value as UiState.Success<*>).data
+                    if (items is List<*>)
+                    items(items) {
+                        SoundItem(sound = it as SoundDto, { id ->
                             onItemClick(id)
                         }, onDeleteItem, { saved ->
                             onItemSaved(saved)

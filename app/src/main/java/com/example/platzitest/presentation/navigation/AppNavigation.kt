@@ -50,7 +50,9 @@ fun AppNavigation(
         ) { navBackStackEntry ->
             val soundId = navBackStackEntry.arguments?.getInt(AppRoutes.SOUND_ID) ?: 0
             detailViewModel.getSoundById(soundId)
-            DetailScreen(detailViewModel.sound.collectAsState())
+            DetailScreen(detailViewModel.sound.collectAsState()){
+                navController.popBackStack()
+            }
         }
     }
 }
