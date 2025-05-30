@@ -35,7 +35,10 @@ object ViewModelModule {
     }
 
     @Provides
-    fun provideDetailViewModel(getSoundUseCase: GetSoundUseCase): DetailViewModel {
-        return DetailViewModel(getSoundUseCase)
+    fun provideDetailViewModel(
+        getSoundUseCase: GetSoundUseCase,
+        updateUseCase: UpdateUseCase
+    ): DetailViewModel {
+        return DetailViewModel(getSoundUseCase, updateUseCase)
     }
 }

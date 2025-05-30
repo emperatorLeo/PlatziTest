@@ -41,7 +41,7 @@ import com.example.platzitest.presentation.theme.Font10sp
 import com.example.platzitest.presentation.theme.Font12sp
 import com.example.platzitest.presentation.theme.Font15sp
 import com.example.platzitest.presentation.theme.LightBlue
-import com.example.platzitest.presentation.theme.intenseRed
+import com.example.platzitest.presentation.theme.IntenseRed
 
 @Composable
 fun SoundItem(
@@ -146,7 +146,7 @@ private fun ItemReadMode(
             Image(
                 imageVector = Icons.Filled.Delete,
                 "",
-                colorFilter = ColorFilter.tint(intenseRed),
+                colorFilter = ColorFilter.tint(IntenseRed),
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
                     .size(40.dp)
@@ -264,7 +264,7 @@ private fun ItemEditionMode(
             Image(
                 imageVector = Icons.Filled.Delete,
                 "",
-                colorFilter = ColorFilter.tint(intenseRed),
+                colorFilter = ColorFilter.tint(IntenseRed),
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
                     .size(40.dp)

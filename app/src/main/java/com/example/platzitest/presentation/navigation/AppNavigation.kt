@@ -30,8 +30,13 @@ fun AppNavigation(
                 mainViewModel::updateSound,
                 mainViewModel::deleteSound,
                 mainViewModel::insertSound,
-                {id ->
-                    navController.navigate(AppRoutes.DETAIL_SCREEN.replace("{${AppRoutes.SOUND_ID}}", id.toString()))
+                { id ->
+                    navController.navigate(
+                        AppRoutes.DETAIL_SCREEN.replace(
+                            "{${AppRoutes.SOUND_ID}}",
+                            id.toString()
+                        )
+                    )
                 },
                 mainViewModel::searchSound
             )
@@ -45,7 +50,7 @@ fun AppNavigation(
         ) { navBackStackEntry ->
             val soundId = navBackStackEntry.arguments?.getInt(AppRoutes.SOUND_ID) ?: 0
             detailViewModel.getSoundById(soundId)
-            DetailScreen(detailViewModel.sound.collectAsState())
+            DetailScreen(detailViewModel.sound.collectAsState(), detailViewModel::updateSound)
         }
     }
 }
