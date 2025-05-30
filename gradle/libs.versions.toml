@@ -8,14 +8,17 @@ ksp = "2.0.21-1.0.27"
 ktlinVersion = "11.6.1"
 kotlin = "2.0.21"
 media3Version = "1.7.1"
+mockk-version = "1.13.6"
 okhttpVersion = "4.12.0"
 retrofitVersion = "2.11.0"
 roomVersion = "2.7.1"
+coroutines-test-version = "1.9.0"
 coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.9.0"
+androidx-arch-version = "2.2.0"
 activityCompose = "1.10.1"
 composeBom = "2025.05.01"
 
@@ -33,6 +36,9 @@ media3-ui = { group = "androidx.media3", name = "media3-ui", version.ref = "medi
 media3-common = { group = "androidx.media3", name = "media3-common", version.ref = "media3Version" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttpVersion" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpVersion" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk-version" }
+coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines-test-version" }
+androidx-arch-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "androidx-arch-version" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
 room = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion" }
