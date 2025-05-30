@@ -2,10 +2,12 @@ package com.example.platzitest.data.repository
 
 import com.example.platzitest.data.local.services.LocalServices
 import com.example.platzitest.data.remote.apidatasource.ApiDataSource
+import com.example.platzitest.domain.dtos.SoundDetailsDto
 import com.example.platzitest.domain.dtos.SoundDto
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 import retrofit2.Response.error
+import retrofit2.Response.success
 
 class RepositoryImp(
     private val apiDataSource: ApiDataSource,
@@ -20,8 +22,19 @@ class RepositoryImp(
 
                 localServices.feedDatabase(listEntity ?: emptyList())
                 getFromDataBase().collect { list ->
-                    emit(Response.success(list))
+                    emit(success(list))
                 }
+            } else {
+                emit(error(it.code(), it.errorBody()!!))
+            }
+        }
+    }
+
+    override suspend fun getSoundInfo(id: Int) = flow<Response<SoundDetailsDto>> {
+        apiDataSource.getSoundInfo(id).collect {
+            if (it.isSuccessful) {
+                val soundEntity = it.body()?.fromResponseToDto()
+                emit(success(soundEntity))
             } else {
                 emit(error(it.code(), it.errorBody()!!))
             }
@@ -54,7 +67,7 @@ class RepositoryImp(
 
     override suspend fun deleteSound(sound: SoundDto) = flow {
         localServices.deleteSound(sound.fromDtoToEntity())
-        getFromDataBase().collect{
+        getFromDataBase().collect {
             emit(it)
         }
     }

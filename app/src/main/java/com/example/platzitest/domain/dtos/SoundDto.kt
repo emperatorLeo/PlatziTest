@@ -13,8 +13,4 @@ data class SoundDto(val id: Int, val name: String, val username: String, var lik
             )
         }
     }
-
-    companion object {
-        fun EMPTY() = SoundDto(0, "", "", false)
-    }
 }
