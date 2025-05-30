@@ -51,7 +51,7 @@ fun SearchBarComponent(
 
         TextField( value = text, onValueChange = { input ->
             text = input
-        }, label = {
+        }, singleLine = true, label = {
             Text(
                 stringResource(R.string.search_sound),
                 fontSize = Font12sp,
