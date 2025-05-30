@@ -1,11 +1,12 @@
 [versions]
-agp = "8.10.0"
+agp = "8.10.1"
 gsonVersion = "2.11.0"
 hiltAndroid = "2.56.2"
 hiltNavigationVersion = "1.2.0"
 ksp = "2.0.21-1.0.27"
 ktlinVersion = "11.6.1"
 kotlin = "2.0.21"
+media3Version = "1.7.1"
 okhttpVersion = "4.12.0"
 retrofitVersion = "2.11.0"
 roomVersion = "2.7.1"
@@ -24,6 +25,10 @@ gson-converter = { group = "com.squareup.retrofit2", name = "converter-gson", ve
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
 hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationVersion" }
+media3-session = {group = "androidx.media3", name = "media3-session", version.ref = "media3Version"}
+media3-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", version.ref = "media3Version" }
+media3-ui = { group = "androidx.media3", name = "media3-ui", version.ref = "media3Version" }
+media3-common = { group = "androidx.media3", name = "media3-common", version.ref = "media3Version" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttpVersion" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpVersion" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
