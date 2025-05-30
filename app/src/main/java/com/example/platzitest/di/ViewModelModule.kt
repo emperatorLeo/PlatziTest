@@ -1,11 +1,13 @@
 package com.example.platzitest.di
 
 import com.example.platzitest.domain.usecase.DeleteUseCase
+import com.example.platzitest.domain.usecase.GetSoundUseCase
 import com.example.platzitest.domain.usecase.InsertUseCase
 import com.example.platzitest.domain.usecase.ReadUseCase
-import com.example.platzitest.presentation.viewmodel.PlatziViewModel
+import com.example.platzitest.presentation.viewmodel.MainViewModel
 import com.example.platzitest.domain.usecase.SearchUseCase
 import com.example.platzitest.domain.usecase.UpdateUseCase
+import com.example.platzitest.presentation.viewmodel.DetailViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,13 +18,24 @@ import dagger.hilt.android.components.ViewModelComponent
 object ViewModelModule {
 
     @Provides
-    fun providePlatziViewModel(
+    fun provideMainViewModel(
         readUseCase: ReadUseCase,
         searchUseCase: SearchUseCase,
         updateUseCase: UpdateUseCase,
         deleteUseCase: DeleteUseCase,
         insertUseCase: InsertUseCase
-    ): PlatziViewModel {
-        return PlatziViewModel(readUseCase, searchUseCase, updateUseCase, deleteUseCase, insertUseCase)
+    ): MainViewModel {
+        return MainViewModel(
+            readUseCase,
+            searchUseCase,
+            updateUseCase,
+            deleteUseCase,
+            insertUseCase
+        )
+    }
+
+    @Provides
+    fun provideDetailViewModel(getSoundUseCase: GetSoundUseCase): DetailViewModel {
+        return DetailViewModel(getSoundUseCase)
     }
 }

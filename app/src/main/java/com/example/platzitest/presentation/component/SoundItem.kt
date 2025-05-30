@@ -46,7 +46,7 @@ import com.example.platzitest.presentation.theme.intenseRed
 @Composable
 fun SoundItem(
     sound: SoundDto,
-    onSoundClick: (SoundDto) -> Unit,
+    onItemClick: (Int) -> Unit,
     onDeleteItem: (SoundDto) -> Unit,
     saveChanges: (SoundDto) -> Unit
 ) {
@@ -54,13 +54,13 @@ fun SoundItem(
     var innerSound by remember { mutableStateOf(sound) }
 
     if (!isEditionMode) {
-        ItemReadMode(innerSound, onSoundClick, {
+        ItemReadMode(innerSound, onItemClick, {
             isEditionMode = !isEditionMode
         }, onDeleteItem) {
             saveChanges(innerSound)
         }
     } else {
-        ItemEditionMode(sound, onDeleteItem) {
+        ItemEditionMode(sound, onDeleteItem, onItemClick) {
             innerSound = it
             saveChanges(innerSound)
             isEditionMode = !isEditionMode
@@ -71,7 +71,7 @@ fun SoundItem(
 @Composable
 private fun ItemReadMode(
     sound: SoundDto,
-    onSoundClick: (SoundDto) -> Unit,
+    onItemClick: (Int) -> Unit,
     edition: () -> Unit,
     onDeleteItem: (SoundDto) -> Unit,
     saveChanges: (SoundDto) -> Unit
@@ -93,7 +93,7 @@ private fun ItemReadMode(
                 modifier = Modifier
                     .width(width = 230.dp)
                     .wrapContentHeight()
-                    .clickable { onSoundClick(sound) }) {
+                    .clickable { onItemClick(sound.id) }) {
 
                 Text(
                     modifier = Modifier.padding(top = Dimen5dp),
@@ -163,6 +163,7 @@ private fun ItemReadMode(
 private fun ItemEditionMode(
     sound: SoundDto,
     onDeleteItem: (SoundDto) -> Unit,
+    onItemClicked: (Int) -> Unit,
     saveChanges: (SoundDto) -> Unit
 ) {
     var innerLike by remember { mutableStateOf(sound.like) }
@@ -189,6 +190,9 @@ private fun ItemEditionMode(
                 modifier = Modifier
                     .width(width = 230.dp)
                     .wrapContentHeight()
+                    .clickable {
+                        onItemClicked(sound.id)
+                    }
             ) {
 
                 Text(

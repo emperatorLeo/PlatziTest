@@ -4,29 +4,48 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.platzitest.presentation.navigation.AppRoutes.MAIN_SCREEN
+import com.example.platzitest.presentation.screen.DetailScreen
 import com.example.platzitest.presentation.screen.MainScreen
-import com.example.platzitest.presentation.viewmodel.PlatziViewModel
+import com.example.platzitest.presentation.viewmodel.DetailViewModel
+import com.example.platzitest.presentation.viewmodel.MainViewModel
 
 @Composable
 fun AppNavigation(
     navController: NavHostController = rememberNavController(),
-    viewModel: PlatziViewModel = hiltViewModel()
+    mainViewModel: MainViewModel = hiltViewModel(),
+    detailViewModel: DetailViewModel = hiltViewModel()
 ) {
-    viewModel.readFromDatabase()
+    mainViewModel.readFromDatabase()
 
     NavHost(navController, startDestination = MAIN_SCREEN) {
         composable(MAIN_SCREEN) {
             MainScreen(
-                viewModel.uiState.collectAsState(),
-                viewModel::updateSound,
-                viewModel::deleteSound,
-                viewModel::insertSound,
-                viewModel::searchSound
+                mainViewModel.uiState.collectAsState(),
+                mainViewModel::updateSound,
+                mainViewModel::deleteSound,
+                mainViewModel::insertSound,
+                {id ->
+                    navController.navigate(AppRoutes.DETAIL_SCREEN.replace("{${AppRoutes.SOUND_ID}}", id.toString()))
+                },
+                mainViewModel::searchSound
             )
+        }
+
+        composable(
+            AppRoutes.DETAIL_SCREEN,
+            arguments = listOf(navArgument(AppRoutes.SOUND_ID) {
+                type = NavType.IntType
+            })
+        ) { navBackStackEntry ->
+            val soundId = navBackStackEntry.arguments?.getInt(AppRoutes.SOUND_ID) ?: 0
+            detailViewModel.getSoundById(soundId)
+            DetailScreen(detailViewModel.sound.collectAsState())
         }
     }
 }

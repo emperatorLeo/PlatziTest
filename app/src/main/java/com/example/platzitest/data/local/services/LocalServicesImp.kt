@@ -34,6 +34,12 @@ class LocalServicesImp(db: PlatziDatabase) : LocalServices {
         }
     }
 
+    override suspend fun getSoundById(id: Int) = flow {
+        dao.getSoundsById(id).collect {
+            emit(it)
+        }
+    }
+
     override suspend fun deleteSound(sound: SoundEntity) {
         withContext(Dispatchers.IO) {
             dao.deleteSound(sound)

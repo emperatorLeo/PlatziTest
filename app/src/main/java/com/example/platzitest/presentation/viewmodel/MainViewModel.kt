@@ -18,7 +18,7 @@ import javax.inject.Inject
 import kotlin.random.Random
 
 @HiltViewModel
-class PlatziViewModel @Inject constructor(
+class MainViewModel @Inject constructor(
     private val readUseCase: ReadUseCase,
     private val searchUseCase: SearchUseCase,
     private val updateUseCase: UpdateUseCase,

@@ -1,6 +1,5 @@
 package com.example.platzitest.presentation.screen
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,6 +33,7 @@ fun MainScreen(
     onItemSaved: (SoundDto) -> Unit,
     onDeleteItem: (SoundDto) -> Unit,
     onAddItem: () -> Unit,
+    onItemClick: (Int) -> Unit,
     search: (String) -> Unit
 ) {
     Scaffold(
@@ -64,8 +64,8 @@ fun MainScreen(
             when (uiState.value) {
                 is UiState.Success -> {
                     items((uiState.value as UiState.Success).listSound) {
-                        SoundItem(sound = it, {
-                            Log.d("Leo", "click on item")
+                        SoundItem(sound = it, { id ->
+                            onItemClick(id)
                         }, onDeleteItem, { saved ->
                             onItemSaved(saved)
                         })

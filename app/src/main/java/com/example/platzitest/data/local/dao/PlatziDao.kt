@@ -25,6 +25,9 @@ interface PlatziDao {
     @Query("SELECT * FROM $SOUND_TABLE")
     fun getSounds(): Flow<List<SoundEntity>>
 
+    @Query("SELECT * FROM $SOUND_TABLE WHERE id = :id")
+    fun getSoundsById(id: Int): Flow<SoundEntity>
+
     @Delete
     suspend fun deleteSound(sound: SoundEntity)
 }

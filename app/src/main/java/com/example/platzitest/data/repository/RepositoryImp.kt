@@ -46,6 +46,12 @@ class RepositoryImp(
         }
     }
 
+    override suspend fun getSoundById(id: Int) = flow {
+        localServices.getSoundById(id).collect {
+            emit(it.fromEntityToDto())
+        }
+    }
+
     override suspend fun deleteSound(sound: SoundDto) = flow {
         localServices.deleteSound(sound.fromDtoToEntity())
         getFromDataBase().collect{
