@@ -20,11 +20,14 @@ import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
+import com.example.platzitest.common.EMPTY_STRING
 import com.example.platzitest.domain.dtos.SoundDto
 import com.example.platzitest.presentation.component.SearchBarComponent
 import com.example.platzitest.presentation.component.SoundItem
 import com.example.platzitest.presentation.state.UiState
+import com.example.platzitest.presentation.theme.Dimen100dp
+import com.example.platzitest.presentation.theme.Dimen300dp
+import com.example.platzitest.presentation.theme.Dimen40dp
 import com.example.platzitest.presentation.theme.LightBlue
 
 @Composable
@@ -40,12 +43,12 @@ fun MainScreen(
         modifier = Modifier.fillMaxSize(),
         floatingActionButton = {
             FloatingActionButton(
-                onClick = onAddItem, modifier = Modifier.size(40.dp),
+                onClick = onAddItem, modifier = Modifier.size(Dimen40dp),
                 shape = CircleShape,
                 containerColor = LightBlue,
                 contentColor = Color.White
             ) {
-                Icon(Icons.Filled.Add, "")
+                Icon(Icons.Filled.Add, EMPTY_STRING)
             }
         },
         floatingActionButtonPosition = FabPosition.Center
@@ -76,11 +79,11 @@ fun MainScreen(
 
                 is UiState.Loading -> {
                     item {
-                        Box(modifier = Modifier.size(300.dp)) {
+                        Box(modifier = Modifier.size(Dimen300dp)) {
                             CircularProgressIndicator(
                                 modifier = Modifier
-                                    .size(100.dp)
-                                    .padding(top = 100.dp)
+                                    .size(Dimen100dp)
+                                    .padding(top = Dimen100dp)
                                     .align(Alignment.Center),
                                 color = LightBlue,
                             )

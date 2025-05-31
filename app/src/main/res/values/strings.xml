@@ -3,4 +3,6 @@
     <string name="search_sound">Introduce una sonido a buscar como Piano,Violin</string>
     <string name="empty_results">Ups parece que no hay resultados!</string>
     <string name="error_message">Lo sentimos, tuvimos algunos fallos, vuelve a intentar mas tarde</string>
+    <string name="id_label">ID: %s</string>
+    <string name="author_label">Autor: %s</string>
 </resources>

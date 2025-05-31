@@ -28,23 +28,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.fromHtml
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
+import com.example.platzitest.R
 import com.example.platzitest.common.EXAMPLE_AUDIO_URI
+import com.example.platzitest.common.LOTTIE_URI
 import com.example.platzitest.domain.dtos.SoundDetailsDto
 import com.example.platzitest.presentation.state.UiState
 import com.example.platzitest.presentation.theme.DarkBlue
+import com.example.platzitest.presentation.theme.Dimen100dp
 import com.example.platzitest.presentation.theme.Dimen10dp
+import com.example.platzitest.presentation.theme.Dimen200dp
+import com.example.platzitest.presentation.theme.Dimen20dp
+import com.example.platzitest.presentation.theme.Dimen30dp
+import com.example.platzitest.presentation.theme.Dimen50dp
 import com.example.platzitest.presentation.theme.Font15sp
+import com.example.platzitest.presentation.theme.Font20sp
 import com.example.platzitest.presentation.theme.LightBlue
 import com.lottiefiles.dotlottie.core.compose.runtime.DotLottieController
 import com.lottiefiles.dotlottie.core.compose.ui.DotLottieAnimation
@@ -66,7 +73,7 @@ fun DetailScreen(uiState: State<UiState>, goBack: () -> Unit) {
             ) {
                 CircularProgressIndicator(
                     modifier = Modifier
-                        .size(100.dp)
+                        .size(Dimen100dp)
                         .align(Alignment.Center),
                     color = Color.White,
                 )
@@ -122,8 +129,8 @@ fun SuccessDetailScreen(
             ),
             modifier = Modifier
                 .align(Alignment.Start)
-                .padding(start = 20.dp, top = 50.dp)
-                .size(30.dp)
+                .padding(start = Dimen20dp, top = Dimen50dp)
+                .size(Dimen30dp)
                 .clickable {
                     exoPlayer.stop()
                     exoPlayer.release()
@@ -132,21 +139,21 @@ fun SuccessDetailScreen(
         )
 
         Text(
-            text = "ID: ${soundDetailsDto.id}",
+            text = stringResource(R.string.id_label, soundDetailsDto.id),
             style = TextStyle(
                 fontSize = Font15sp,
                 color = Color.White,
                 fontWeight = FontWeight.Bold
             ),
             modifier = Modifier
-                .padding(top = 10.dp, start = 20.dp)
+                .padding(top = Dimen10dp, start = Dimen20dp)
                 .align(Alignment.Start)
         )
 
         Text(
             text = soundDetailsDto.name,
-            style = TextStyle(fontSize = 20.sp, color = DarkBlue),
-            modifier = Modifier.padding(top = 10.dp)
+            style = TextStyle(fontSize = Font20sp, color = DarkBlue),
+            modifier = Modifier.padding(top = Dimen10dp)
         )
 
         Text(
@@ -154,7 +161,7 @@ fun SuccessDetailScreen(
             style = TextStyle(fontSize = Font15sp, color = DarkBlue),
             modifier = Modifier
                 .padding(Dimen10dp)
-                .height(100.dp)
+                .height(Dimen100dp)
                 .verticalScroll(rememberScrollState())
         )
 
@@ -166,12 +173,12 @@ fun SuccessDetailScreen(
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
-                .padding(start = Dimen10dp, end = Dimen10dp, bottom = 20.dp)
+                .height(Dimen200dp)
+                .padding(start = Dimen10dp, end = Dimen10dp, bottom = Dimen20dp)
         )
 
         DotLottieAnimation(
-            source = DotLottieSource.Url("https://lottie.host/52b78870-4b70-46a5-b4f8-b6aed5225c14/rui8qZZLyK.lottie"),
+            source = DotLottieSource.Url(LOTTIE_URI),
             autoplay = false,
             controller = lottieController
         )
