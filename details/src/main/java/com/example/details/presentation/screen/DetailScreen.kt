@@ -35,7 +35,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.media3.common.MediaItem
-import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
 import com.example.datasource.domain.dtos.SoundDetailsDto
@@ -43,7 +42,7 @@ import com.example.details.R
 import com.example.details.common.EXAMPLE_AUDIO_URI
 import com.example.details.common.LOTTIE_URI
 import com.example.details.presentation.state.UiState
-import com.example.details.presentation.theme.DarkBlue
+import com.example.details.presentation.theme.DarkPurple
 import com.example.details.presentation.theme.Dimen100dp
 import com.example.details.presentation.theme.Dimen10dp
 import com.example.details.presentation.theme.Dimen200dp
@@ -52,7 +51,6 @@ import com.example.details.presentation.theme.Dimen30dp
 import com.example.details.presentation.theme.Dimen50dp
 import com.example.details.presentation.theme.Font15sp
 import com.example.details.presentation.theme.Font20sp
-import com.example.details.presentation.theme.LightBlue
 import com.lottiefiles.dotlottie.core.compose.runtime.DotLottieController
 import com.lottiefiles.dotlottie.core.compose.ui.DotLottieAnimation
 import com.lottiefiles.dotlottie.core.util.DotLottieSource
@@ -69,7 +67,7 @@ fun DetailScreen(uiState: State<UiState>, goBack: () -> Unit) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(LightBlue)
+                    .background(DarkPurple)
             ) {
                 CircularProgressIndicator(
                     modifier = Modifier
@@ -93,7 +91,7 @@ fun DetailScreen(uiState: State<UiState>, goBack: () -> Unit) {
             }
         }
 
-        else -> {}
+        else -> { ErrorState() }
     }
 }
 
@@ -105,7 +103,7 @@ fun SuccessDetailScreen(
 ) {
     val lottieController = remember { DotLottieController() }
 
-    exoPlayer.addListener(object : Player.Listener {
+    /*exoPlayer.addListener(object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
             if (isPlaying) {
                 lottieController.play()
@@ -113,12 +111,12 @@ fun SuccessDetailScreen(
                 lottieController.pause()
             }
         }
-    })
+    })*/
 
     Column(
         Modifier
             .fillMaxSize()
-            .background(LightBlue),
+            .background(DarkPurple),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
@@ -132,6 +130,7 @@ fun SuccessDetailScreen(
                 .padding(start = Dimen20dp, top = Dimen50dp)
                 .size(Dimen30dp)
                 .clickable {
+                    exoPlayer.playWhenReady = false
                     exoPlayer.stop()
                     exoPlayer.release()
                     goBack()
@@ -152,13 +151,13 @@ fun SuccessDetailScreen(
 
         Text(
             text = soundDetailsDto.name,
-            style = TextStyle(fontSize = Font20sp, color = DarkBlue),
+            style = TextStyle(fontSize = Font20sp, color = Color.White),
             modifier = Modifier.padding(top = Dimen10dp)
         )
 
         Text(
             text = AnnotatedString.Companion.fromHtml(soundDetailsDto.description),
-            style = TextStyle(fontSize = Font15sp, color = DarkBlue),
+            style = TextStyle(fontSize = Font15sp, color = Color.White),
             modifier = Modifier
                 .padding(Dimen10dp)
                 .height(Dimen100dp)

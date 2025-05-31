@@ -10,11 +10,13 @@ import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
@@ -38,26 +40,41 @@ fun SearchBarComponent(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(Color.LightGray)
+            .background(Color.Gray),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            modifier = Modifier.padding(Dimen10dp).clickable {
-                search(text)
-            },
+            modifier = Modifier
+                .padding(Dimen10dp)
+                .clickable {
+                    search(text)
+                },
             imageVector = Icons.Rounded.Search,
             tint = LightBlue,
             contentDescription = EMPTY_STRING
         )
 
-        TextField( value = text, onValueChange = { input ->
-            text = input
-        }, singleLine = true, label = {
-            Text(
-                stringResource(R.string.search_sound),
-                fontSize = Font12sp,
-                style = TextStyle(fontStyle = FontStyle.Italic),
-                modifier = Modifier.testTag(SEARCH_BAR_TEST_TAG)
-            )
-        })
+        TextField(
+            value = text,
+            onValueChange = { input ->
+                text = input
+            },
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color.LightGray,
+                unfocusedContainerColor = Color.LightGray,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                cursorColor = LightBlue
+            ),
+            singleLine = true,
+            label = {
+                Text(
+                    stringResource(R.string.search_sound),
+                    fontSize = Font12sp,
+                    style = TextStyle(fontStyle = FontStyle.Italic),
+                    modifier = Modifier.testTag(SEARCH_BAR_TEST_TAG),
+                    color = LightBlue
+                )
+            })
     }
 }

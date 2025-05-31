@@ -42,7 +42,11 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             searchUseCase(query).collect {
                 if (it.isSuccessful) {
-                    _uiState.value = UiState.Success(it.body() ?: emptyList())
+                    if (it.body().isNullOrEmpty()){
+                        _uiState.value = UiState.EmptyList
+                    } else {
+                        _uiState.value = UiState.Success(it.body() ?: emptyList())
+                    }
                 }
             }
         }

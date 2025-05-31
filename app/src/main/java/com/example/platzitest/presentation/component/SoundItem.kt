@@ -38,7 +38,9 @@ import androidx.compose.ui.text.font.FontWeight
 import com.example.platzitest.R
 import com.example.datasource.common.EMPTY_STRING
 import com.example.datasource.domain.dtos.SoundDto
+import com.example.platzitest.presentation.theme.Dimen10dp
 import com.example.platzitest.presentation.theme.Dimen230dp
+import com.example.platzitest.presentation.theme.Dimen30dp
 import com.example.platzitest.presentation.theme.Dimen40dp
 import com.example.platzitest.presentation.theme.Dimen5dp
 import com.example.platzitest.presentation.theme.Font10sp
@@ -86,13 +88,13 @@ private fun ItemReadMode(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = Dimen5dp, end = Dimen5dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .background(Color.White)
+                .padding(horizontal = Dimen5dp)
         ) {
             Column(
                 modifier = Modifier
@@ -127,8 +129,8 @@ private fun ItemReadMode(
                 colorFilter = ColorFilter.tint(if (innerLike) Color.Red else Color.Black),
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
-                    .padding(end = Dimen5dp)
-                    .size(Dimen40dp)
+                    .padding(end = Dimen10dp)
+                    .size(Dimen30dp)
                     .clickable {
                         innerLike = !innerLike
                         saveChanges(sound.copy(like = innerLike))
@@ -141,8 +143,8 @@ private fun ItemReadMode(
                 colorFilter = ColorFilter.tint(LightBlue),
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
-                    .padding(end = Dimen5dp)
-                    .size(Dimen40dp)
+                    .padding(end = Dimen10dp)
+                    .size(Dimen30dp)
                     .clickable {
                         edition()
                     }
@@ -154,7 +156,7 @@ private fun ItemReadMode(
                 colorFilter = ColorFilter.tint(IntenseRed),
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
-                    .size(Dimen40dp)
+                    .size(Dimen30dp)
                     .clickable {
                         onDeleteItem(sound)
                     }

@@ -23,6 +23,8 @@ class DetailViewModel @Inject constructor(
             getSoundInfoUseCase(soundId).collect {
                 if (it.isSuccessful){
                     _uiState.value = UiState.Success(it.body())
+                } else {
+                    _uiState.value = UiState.Error(it.message())
                 }
             }
         }
