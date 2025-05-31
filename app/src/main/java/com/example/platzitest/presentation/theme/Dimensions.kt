@@ -9,3 +9,4 @@ val Dimen10dp = 10.dp
 val Font10sp = 10.sp
 val Font12sp = 12.sp
 val Font15sp = 15.sp
+val Font20sp = 20.sp

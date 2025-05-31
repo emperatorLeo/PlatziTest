@@ -111,7 +111,7 @@ private fun ItemReadMode(
                 )
 
                 Text(
-                    text = "Author: ${sound.username}",
+                    text = "Autor: ${sound.username}",
                     color = Color.Black,
                     fontSize = Font12sp
                 )

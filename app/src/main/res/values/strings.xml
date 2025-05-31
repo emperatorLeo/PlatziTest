@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">PlatziTest</string>
     <string name="search_sound">Introduce una sonido a buscar como Piano,Violin</string>
+    <string name="empty_results">Ups parece que no hay resultados!</string>
+    <string name="error_message">Lo sentimos, tuvimos algunos fallos, vuelve a intentar mas tarde</string>
 </resources>

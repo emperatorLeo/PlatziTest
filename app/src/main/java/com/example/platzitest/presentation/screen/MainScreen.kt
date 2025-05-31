@@ -1,6 +1,5 @@
 package com.example.platzitest.presentation.screen
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -89,8 +88,16 @@ fun MainScreen(
                     }
                 }
 
-                is UiState.Error -> {}
-                is UiState.EmptyList -> {}
+                is UiState.Error -> {
+                    item {
+                        ErrorState()
+                    }
+                }
+                is UiState.EmptyList -> {
+                    item {
+                        EmptyState()
+                    }
+                }
                 else -> {}
             }
 
