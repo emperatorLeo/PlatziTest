@@ -22,7 +22,8 @@ object DBModule {
     fun provideDatabase(@ApplicationContext appContext: Context): PlatziDatabase {
         return Room.databaseBuilder(appContext, PlatziDatabase::class.java, DATA_BASE_NAME).build()
     }
-    
+
+    @Singleton
     @Provides
     fun provideLocalServices(db: PlatziDatabase): LocalServices {
         return LocalServicesImp(db)

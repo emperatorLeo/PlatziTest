@@ -39,7 +39,6 @@ fun MainScreen(
     onItemClick: (Int) -> Unit,
     search: (String) -> Unit
 ) {
-    val context = LocalContext.current
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         floatingActionButton = {

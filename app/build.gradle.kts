@@ -1,5 +1,3 @@
-import java.util.Properties
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -56,6 +54,10 @@ dependencies {
 
     // Gson
     implementation(libs.gson)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.gson.converter)
 
     // Hilt
     implementation(libs.hilt.android)

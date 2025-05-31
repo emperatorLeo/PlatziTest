@@ -1,6 +1,5 @@
 package com.example.details.presentation.screen
 
-import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -181,7 +180,8 @@ fun SuccessDetailScreen(
         DotLottieAnimation(
             source = DotLottieSource.Url(LOTTIE_URI),
             autoplay = false,
-            controller = lottieController
+            controller = lottieController,
+            loop = true
         )
     }
 }
