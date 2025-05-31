@@ -2,7 +2,7 @@ package com.example.platzitest.data.repository
 
 import com.example.platzitest.data.local.services.LocalServices
 import com.example.platzitest.data.remote.apidatasource.ApiDataSource
-import com.example.platzitest.domain.dtos.SoundDetailsDto
+import com.example.details.domain.dto.SoundDetailsDto
 import com.example.platzitest.domain.dtos.SoundDto
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response

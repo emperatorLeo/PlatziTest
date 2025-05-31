@@ -1,6 +1,6 @@
 package com.example.platzitest.data.model.responses
 
-import com.example.platzitest.domain.dtos.SoundDetailsDto
+import com.example.details.domain.dto.SoundDetailsDto
 import com.google.gson.annotations.SerializedName
 
 data class SoundDetailResponse(

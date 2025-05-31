@@ -7,7 +7,7 @@ import com.example.platzitest.domain.usecase.InsertUseCase
 import com.example.platzitest.domain.usecase.ReadUseCase
 import com.example.platzitest.domain.usecase.SearchUseCase
 import com.example.platzitest.domain.usecase.UpdateUseCase
-import com.example.platzitest.presentation.state.UiState
+import com.example.details.presentation.state.UiState
 import com.example.platzitest.presentation.viewmodel.MainViewModel
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery

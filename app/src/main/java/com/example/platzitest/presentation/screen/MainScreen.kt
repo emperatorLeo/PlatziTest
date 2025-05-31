@@ -24,7 +24,7 @@ import com.example.platzitest.common.EMPTY_STRING
 import com.example.platzitest.domain.dtos.SoundDto
 import com.example.platzitest.presentation.component.SearchBarComponent
 import com.example.platzitest.presentation.component.SoundItem
-import com.example.platzitest.presentation.state.UiState
+import com.example.details.presentation.state.UiState
 import com.example.platzitest.presentation.theme.Dimen100dp
 import com.example.platzitest.presentation.theme.Dimen300dp
 import com.example.platzitest.presentation.theme.Dimen40dp

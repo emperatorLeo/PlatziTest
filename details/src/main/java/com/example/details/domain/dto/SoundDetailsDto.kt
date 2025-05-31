@@ -1,4 +1,4 @@
-package com.example.platzitest.domain.dtos
+package com.example.details.domain.dto
 
 data class SoundDetailsDto(
     val id: Int,

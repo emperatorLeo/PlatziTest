@@ -1,4 +1,4 @@
-package com.example.platzitest.presentation.screen
+package com.example.details.presentation.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -38,21 +38,21 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
-import com.example.platzitest.R
-import com.example.platzitest.common.EXAMPLE_AUDIO_URI
-import com.example.platzitest.common.LOTTIE_URI
-import com.example.platzitest.domain.dtos.SoundDetailsDto
-import com.example.platzitest.presentation.state.UiState
-import com.example.platzitest.presentation.theme.DarkBlue
-import com.example.platzitest.presentation.theme.Dimen100dp
-import com.example.platzitest.presentation.theme.Dimen10dp
-import com.example.platzitest.presentation.theme.Dimen200dp
-import com.example.platzitest.presentation.theme.Dimen20dp
-import com.example.platzitest.presentation.theme.Dimen30dp
-import com.example.platzitest.presentation.theme.Dimen50dp
-import com.example.platzitest.presentation.theme.Font15sp
-import com.example.platzitest.presentation.theme.Font20sp
-import com.example.platzitest.presentation.theme.LightBlue
+import com.example.details.R
+import com.example.details.common.EXAMPLE_AUDIO_URI
+import com.example.details.common.LOTTIE_URI
+import com.example.details.domain.dto.SoundDetailsDto
+import com.example.details.presentation.state.UiState
+import com.example.details.presentation.theme.DarkBlue
+import com.example.details.presentation.theme.Dimen100dp
+import com.example.details.presentation.theme.Dimen10dp
+import com.example.details.presentation.theme.Dimen200dp
+import com.example.details.presentation.theme.Dimen20dp
+import com.example.details.presentation.theme.Dimen30dp
+import com.example.details.presentation.theme.Dimen50dp
+import com.example.details.presentation.theme.Font15sp
+import com.example.details.presentation.theme.Font20sp
+import com.example.details.presentation.theme.LightBlue
 import com.lottiefiles.dotlottie.core.compose.runtime.DotLottieController
 import com.lottiefiles.dotlottie.core.compose.ui.DotLottieAnimation
 import com.lottiefiles.dotlottie.core.util.DotLottieSource
@@ -103,7 +103,7 @@ fun SuccessDetailScreen(
     exoPlayer: ExoPlayer,
     goBack: () -> Unit
 ) {
-    val lottieController = remember{ DotLottieController() }
+    val lottieController = remember { DotLottieController() }
 
     exoPlayer.addListener(object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {

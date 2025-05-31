@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "PlatziTest"
 include(":app")
+include(":details")

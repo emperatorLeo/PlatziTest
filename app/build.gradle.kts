@@ -76,15 +76,6 @@ dependencies {
     implementation(libs.hilt.navigation)
     ksp(libs.hilt.android.compiler)
 
-    // Lottie
-    implementation(libs.dotlottie.android)
-
-    // Media3
-    implementation(libs.media3.session)
-    implementation(libs.media3.exoplayer)
-    implementation(libs.media3.ui)
-    implementation(libs.media3.common)
-
     // Okhttp
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)
@@ -109,4 +100,6 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(project(":details"))
 }

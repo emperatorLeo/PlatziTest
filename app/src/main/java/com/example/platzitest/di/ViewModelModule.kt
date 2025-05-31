@@ -1,12 +1,10 @@
 package com.example.platzitest.di
 
 import com.example.platzitest.domain.usecase.DeleteUseCase
-import com.example.platzitest.domain.usecase.GetSoundInfoUseCase
 import com.example.platzitest.domain.usecase.InsertUseCase
 import com.example.platzitest.domain.usecase.ReadUseCase
 import com.example.platzitest.domain.usecase.SearchUseCase
 import com.example.platzitest.domain.usecase.UpdateUseCase
-import com.example.platzitest.presentation.viewmodel.DetailViewModel
 import com.example.platzitest.presentation.viewmodel.MainViewModel
 import dagger.Module
 import dagger.Provides
@@ -32,12 +30,5 @@ object ViewModelModule {
             deleteUseCase,
             insertUseCase
         )
-    }
-
-    @Provides
-    fun provideDetailViewModel(
-        getSoundInfoUseCase: GetSoundInfoUseCase,
-    ): DetailViewModel {
-        return DetailViewModel(getSoundInfoUseCase)
     }
 }

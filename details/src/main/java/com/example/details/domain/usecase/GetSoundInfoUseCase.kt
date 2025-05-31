@@ -1,4 +1,4 @@
-package com.example.platzitest.domain.usecase
+package com.example.details.domain.usecase
 
 import com.example.platzitest.data.repository.Repository
 import javax.inject.Inject
