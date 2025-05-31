@@ -20,20 +20,6 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        android.buildFeatures.buildConfig = true
-
-        val properties = Properties()
-
-        properties.load(project.rootProject.file("local.properties").inputStream())
-        buildConfigField("String", "CLIENT_ID", "\"${properties.getProperty("client_id")}\"")
-        buildConfigField("String", "API_KEY", "\"${properties.getProperty("api_key")}\"")
-        buildConfigField("String", "ACCESS_TOKEN", "\"${properties.getProperty("access_token")}\"")
-        buildConfigField(
-            "String",
-            "REFRESH_TOKEN",
-            "\"${properties.getProperty("refresh_token")}\""
-        )
-        buildConfigField("String", "BASE_URL", "\"https://freesound.org/apiv2/\"")
     }
 
     buildTypes {
@@ -76,20 +62,6 @@ dependencies {
     implementation(libs.hilt.navigation)
     ksp(libs.hilt.android.compiler)
 
-    // Okhttp
-    implementation(libs.okhttp)
-    implementation(libs.okhttp.logging.interceptor)
-
-    // Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.gson.converter)
-
-    // Room
-    implementation(libs.room)
-    implementation(libs.room.ktx)
-    ksp(libs.room.compiler)
-    annotationProcessor(libs.room.compiler)
-
     testImplementation(libs.coroutines.test)
     testImplementation(libs.androidx.arch.core.testing)
     testImplementation(libs.mockk)
@@ -102,4 +74,5 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(project(":details"))
+    implementation(project(":datasource"))
 }

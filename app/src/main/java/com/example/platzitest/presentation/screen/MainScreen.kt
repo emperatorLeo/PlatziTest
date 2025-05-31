@@ -20,8 +20,8 @@ import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.example.platzitest.common.EMPTY_STRING
-import com.example.platzitest.domain.dtos.SoundDto
+import com.example.datasource.common.EMPTY_STRING
+import com.example.datasource.domain.dtos.SoundDto
 import com.example.platzitest.presentation.component.SearchBarComponent
 import com.example.platzitest.presentation.component.SoundItem
 import com.example.details.presentation.state.UiState
@@ -39,6 +39,7 @@ fun MainScreen(
     onItemClick: (Int) -> Unit,
     search: (String) -> Unit
 ) {
+    val context = LocalContext.current
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         floatingActionButton = {

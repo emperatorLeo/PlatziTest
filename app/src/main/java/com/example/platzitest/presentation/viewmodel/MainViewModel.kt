@@ -2,7 +2,7 @@ package com.example.platzitest.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.platzitest.domain.dtos.SoundDto
+import com.example.datasource.domain.dtos.SoundDto
 import com.example.platzitest.domain.usecase.DeleteUseCase
 import com.example.platzitest.domain.usecase.InsertUseCase
 import com.example.platzitest.domain.usecase.ReadUseCase

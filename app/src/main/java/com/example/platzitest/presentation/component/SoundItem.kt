@@ -36,8 +36,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import com.example.platzitest.R
-import com.example.platzitest.common.EMPTY_STRING
-import com.example.platzitest.domain.dtos.SoundDto
+import com.example.datasource.common.EMPTY_STRING
+import com.example.datasource.domain.dtos.SoundDto
 import com.example.platzitest.presentation.theme.Dimen230dp
 import com.example.platzitest.presentation.theme.Dimen40dp
 import com.example.platzitest.presentation.theme.Dimen5dp

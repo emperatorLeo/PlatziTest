@@ -1,5 +1,6 @@
 package com.example.platzitest.di
 
+import com.example.datasource.di.ApiModule
 import com.example.platzitest.domain.usecase.DeleteUseCase
 import com.example.platzitest.domain.usecase.InsertUseCase
 import com.example.platzitest.domain.usecase.ReadUseCase
@@ -11,7 +12,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 
-@Module
+@Module(includes = [ApiModule::class])
 @InstallIn(ViewModelComponent::class)
 object ViewModelModule {
 

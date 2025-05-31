@@ -22,7 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import com.example.platzitest.R
-import com.example.platzitest.common.EMPTY_STRING
+import com.example.datasource.common.EMPTY_STRING
 import com.example.platzitest.presentation.testing.SEARCH_BAR_TEST_TAG
 import com.example.platzitest.presentation.theme.Dimen10dp
 import com.example.platzitest.presentation.theme.Font12sp

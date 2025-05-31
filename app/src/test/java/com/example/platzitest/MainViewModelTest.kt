@@ -1,7 +1,7 @@
 package com.example.platzitest
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.platzitest.domain.dtos.SoundDto
+import com.example.datasource.domain.dtos.SoundDto
 import com.example.platzitest.domain.usecase.DeleteUseCase
 import com.example.platzitest.domain.usecase.InsertUseCase
 import com.example.platzitest.domain.usecase.ReadUseCase

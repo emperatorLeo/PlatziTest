@@ -1,5 +1,6 @@
 package com.example.details.presentation.screen
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -38,10 +39,10 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
+import com.example.datasource.domain.dtos.SoundDetailsDto
 import com.example.details.R
 import com.example.details.common.EXAMPLE_AUDIO_URI
 import com.example.details.common.LOTTIE_URI
-import com.example.details.domain.dto.SoundDetailsDto
 import com.example.details.presentation.state.UiState
 import com.example.details.presentation.theme.DarkBlue
 import com.example.details.presentation.theme.Dimen100dp
