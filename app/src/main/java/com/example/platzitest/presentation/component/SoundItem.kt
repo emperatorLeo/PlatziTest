@@ -23,6 +23,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -32,6 +33,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -39,6 +41,7 @@ import com.example.platzitest.R
 import com.example.datasource.common.EMPTY_STRING
 import com.example.datasource.domain.dtos.SoundDto
 import com.example.platzitest.presentation.theme.Dimen10dp
+import com.example.platzitest.presentation.theme.Dimen200dp
 import com.example.platzitest.presentation.theme.Dimen230dp
 import com.example.platzitest.presentation.theme.Dimen30dp
 import com.example.platzitest.presentation.theme.Dimen40dp
@@ -84,6 +87,7 @@ private fun ItemReadMode(
     saveChanges: (SoundDto) -> Unit
 ) {
     var innerLike by remember { mutableStateOf(sound.like) }
+    var integerResource by remember { mutableIntStateOf(R.drawable.ic_launcher_foreground) }
 
     Column(
         modifier = Modifier
@@ -94,11 +98,23 @@ private fun ItemReadMode(
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .background(Color.White)
-                .padding(horizontal = Dimen5dp)
+                .padding(horizontal = Dimen5dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
+
+            LaunchedEffect(Unit) {
+                integerResource = imageSelector()
+            }
+
+            Image(
+                painter = painterResource(integerResource),
+                "",
+                Modifier.size(Dimen30dp).padding(end = Dimen5dp)
+            )
             Column(
                 modifier = Modifier
-                    .width(width = Dimen230dp)
+                    .width(width = Dimen200dp)
+                    .padding(start = Dimen10dp)
                     .wrapContentHeight()
                     .clickable { onItemClick(sound.id) }) {
 
@@ -128,7 +144,6 @@ private fun ItemReadMode(
                 EMPTY_STRING,
                 colorFilter = ColorFilter.tint(if (innerLike) Color.Red else Color.Black),
                 modifier = Modifier
-                    .align(Alignment.CenterVertically)
                     .padding(end = Dimen10dp)
                     .size(Dimen30dp)
                     .clickable {
@@ -142,7 +157,6 @@ private fun ItemReadMode(
                 EMPTY_STRING,
                 colorFilter = ColorFilter.tint(LightBlue),
                 modifier = Modifier
-                    .align(Alignment.CenterVertically)
                     .padding(end = Dimen10dp)
                     .size(Dimen30dp)
                     .clickable {
@@ -155,7 +169,6 @@ private fun ItemReadMode(
                     EMPTY_STRING,
                 colorFilter = ColorFilter.tint(IntenseRed),
                 modifier = Modifier
-                    .align(Alignment.CenterVertically)
                     .size(Dimen30dp)
                     .clickable {
                         onDeleteItem(sound)
@@ -191,7 +204,8 @@ private fun ItemEditionMode(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .background(Color.White)
+                .background(Color.White),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Column(
                 modifier = Modifier
@@ -240,7 +254,6 @@ private fun ItemEditionMode(
                 EMPTY_STRING,
                 colorFilter = ColorFilter.tint(if (innerLike) Color.Red else Color.Black),
                 modifier = Modifier
-                    .align(Alignment.CenterVertically)
                     .padding(end = Dimen5dp)
                     .size(Dimen40dp)
                     .clickable {
@@ -254,7 +267,6 @@ private fun ItemEditionMode(
                 EMPTY_STRING,
                 colorFilter = ColorFilter.tint(LightBlue),
                 modifier = Modifier
-                    .align(Alignment.CenterVertically)
                     .padding(end = Dimen5dp)
                     .size(Dimen40dp)
                     .clickable {
@@ -273,7 +285,6 @@ private fun ItemEditionMode(
                 EMPTY_STRING,
                 colorFilter = ColorFilter.tint(IntenseRed),
                 modifier = Modifier
-                    .align(Alignment.CenterVertically)
                     .size(Dimen40dp)
                     .clickable {
                         onDeleteItem(sound)
@@ -282,4 +293,17 @@ private fun ItemEditionMode(
         }
         HorizontalDivider()
     }
+}
+
+private fun imageSelector(): Int  {
+    val random = (0..4).random()
+
+    val resources = when (random) {
+        0 -> R.drawable.violin
+        1 -> R.drawable.piano_de_cola
+        2 -> R.drawable.speackers
+        else -> R.drawable.spotify_purple
+    }
+
+    return resources
 }
