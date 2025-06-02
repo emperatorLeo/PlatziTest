@@ -30,4 +30,8 @@ interface PlatziDao {
 
     @Delete
     suspend fun deleteSound(sound: SoundEntity)
+
+    @Query("DELETE FROM $SOUND_TABLE")
+    suspend fun deleteAll()
+
 }

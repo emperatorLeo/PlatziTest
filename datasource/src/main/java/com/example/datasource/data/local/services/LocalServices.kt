@@ -17,4 +17,6 @@ interface LocalServices {
 
     suspend fun deleteSound(sound: SoundEntity)
 
+    suspend fun deleteAll()
+
 }

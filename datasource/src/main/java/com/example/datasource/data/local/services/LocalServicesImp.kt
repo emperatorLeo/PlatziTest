@@ -45,4 +45,7 @@ class LocalServicesImp(db: PlatziDatabase) : LocalServices {
             dao.deleteSound(sound)
         }
     }
+
+    override suspend fun deleteAll() = dao.deleteAll()
+
 }

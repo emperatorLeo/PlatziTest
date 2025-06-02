@@ -20,6 +20,7 @@ class RepositoryImp(
                 if (it.body()?.results.isNullOrEmpty()) {
                     emit(success(emptyList()))
                 } else {
+                    localServices.deleteAll()
                     val listEntity =
                         it.body()?.results?.map { soundItem -> soundItem.fromResponseToEntity() }
 
