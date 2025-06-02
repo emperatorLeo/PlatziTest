@@ -14,14 +14,16 @@ val CircularTypography = Typography(
         fontFamily = CircularFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = Font20sp,
-        lineHeight = 28.sp
+        lineHeight = 28.sp,
+        letterSpacing = 0.5.sp
     ),
 
     headlineMedium = TextStyle(
         fontFamily = CircularFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = Font15sp,
-        lineHeight = 28.sp
+        lineHeight = 28.sp,
+        letterSpacing = 0.5.sp
     ),
 
     headlineSmall = TextStyle(
@@ -29,7 +31,7 @@ val CircularTypography = Typography(
         fontWeight = FontWeight.Thin,
         fontSize = Font10sp,
         lineHeight = 28.sp,
-        letterSpacing = 0.sp
+        letterSpacing = 0.5.sp
     ),
 
     bodyLarge = TextStyle(

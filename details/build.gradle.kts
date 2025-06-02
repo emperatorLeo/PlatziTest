@@ -64,6 +64,10 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.gson.converter)
 
+    // Coil
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+
     testImplementation(libs.coroutines.test)
     testImplementation(libs.androidx.arch.core.testing)
     testImplementation(libs.mockk)

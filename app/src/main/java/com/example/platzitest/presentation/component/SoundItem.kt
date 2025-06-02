@@ -118,19 +118,21 @@ private fun ItemReadMode(
                     .clickable { onItemClick(sound.id) }) {
 
                 Text(
-                    modifier = Modifier.padding(top = Dimen5dp),
+                    modifier = Modifier.padding(top = Dimen10dp),
                     text = stringResource(R.string.id_label, sound.id),
                     color = LightBlue,
                     style = CircularTypography.headlineSmall
                 )
 
                 Text(
+                    modifier = Modifier.padding(top = Dimen10dp),
                     text = sound.name,
                     color = Color.Black,
                     style = CircularTypography.bodyLarge
                 )
 
                 Text(
+                    modifier = Modifier.padding(top = Dimen10dp, bottom = Dimen10dp),
                     text = stringResource(R.string.author_label, sound.username),
                     color = Color.Black,
                     style = CircularTypography.bodyMedium

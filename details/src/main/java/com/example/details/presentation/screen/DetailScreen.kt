@@ -36,6 +36,7 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
+import coil3.compose.AsyncImage
 import com.example.datasource.domain.dtos.SoundDetailsDto
 import com.example.details.R
 import com.example.details.common.EXAMPLE_AUDIO_URI
@@ -152,7 +153,8 @@ fun SuccessDetailScreen(
         Text(
             text = soundDetailsDto.name,
             style = CircularTypography.bodyLarge,
-            modifier = Modifier.padding(top = Dimen10dp)
+            modifier = Modifier.padding(top = Dimen10dp),
+            color = Color.White
         )
 
         Text(
@@ -161,7 +163,15 @@ fun SuccessDetailScreen(
             modifier = Modifier
                 .padding(Dimen10dp)
                 .height(Dimen100dp)
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(rememberScrollState()),
+            color = Color.White
+        )
+
+        AsyncImage(
+            model = soundDetailsDto.imageUrl,
+            contentDescription = null,
+            modifier = Modifier.fillMaxWidth().height(Dimen100dp)
+                .padding(vertical = Dimen10dp)
         )
 
         AndroidView(
