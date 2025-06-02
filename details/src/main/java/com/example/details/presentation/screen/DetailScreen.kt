@@ -107,7 +107,7 @@ fun SuccessDetailScreen(
                 if (isPlaying) {
                     lottieController.play()
                 } else {
-                    lottieController.pause()
+                    lottieController.stop()
                 }
 
             }
