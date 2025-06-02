@@ -18,17 +18,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
-import com.example.platzitest.R
 import com.example.datasource.common.EMPTY_STRING
+import com.example.platzitest.R
 import com.example.platzitest.presentation.testing.SEARCH_BAR_TEST_TAG
 import com.example.platzitest.presentation.theme.Dimen10dp
 import com.example.platzitest.presentation.theme.Font12sp
-import com.example.platzitest.presentation.theme.LightBlue
+import com.example.platzitest.presentation.theme.Purple40
+import com.example.platzitest.presentation.theme.Purple80
+import com.example.platzitest.presentation.theme.PurpleLighter
 
 @Composable
 fun SearchBarComponent(
@@ -40,7 +41,7 @@ fun SearchBarComponent(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(Color.Gray),
+            .background(Purple40),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
@@ -50,7 +51,7 @@ fun SearchBarComponent(
                     search(text)
                 },
             imageVector = Icons.Rounded.Search,
-            tint = LightBlue,
+            tint = Purple80,
             contentDescription = EMPTY_STRING
         )
 
@@ -60,11 +61,13 @@ fun SearchBarComponent(
                 text = input
             },
             colors = TextFieldDefaults.colors(
-                focusedContainerColor = Color.LightGray,
-                unfocusedContainerColor = Color.LightGray,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                cursorColor = LightBlue
+                focusedContainerColor = PurpleLighter,
+                unfocusedContainerColor = PurpleLighter,
+                focusedIndicatorColor = PurpleLighter,
+                unfocusedIndicatorColor = PurpleLighter,
+                cursorColor = Purple40,
+                focusedTextColor = Purple40,
+                unfocusedTextColor = Purple40
             ),
             singleLine = true,
             label = {
@@ -73,7 +76,7 @@ fun SearchBarComponent(
                     fontSize = Font12sp,
                     style = TextStyle(fontStyle = FontStyle.Italic),
                     modifier = Modifier.testTag(SEARCH_BAR_TEST_TAG),
-                    color = LightBlue
+                    color = Purple40
                 )
             })
     }

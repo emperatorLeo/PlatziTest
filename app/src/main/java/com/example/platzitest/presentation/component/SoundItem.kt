@@ -37,9 +37,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import com.example.platzitest.R
 import com.example.datasource.common.EMPTY_STRING
 import com.example.datasource.domain.dtos.SoundDto
+import com.example.platzitest.R
 import com.example.platzitest.presentation.theme.Dimen10dp
 import com.example.platzitest.presentation.theme.Dimen200dp
 import com.example.platzitest.presentation.theme.Dimen230dp
@@ -51,6 +51,9 @@ import com.example.platzitest.presentation.theme.Font12sp
 import com.example.platzitest.presentation.theme.Font15sp
 import com.example.platzitest.presentation.theme.IntenseRed
 import com.example.platzitest.presentation.theme.LightBlue
+import com.example.platzitest.presentation.theme.Purple40
+import com.example.platzitest.presentation.theme.Purple80
+import com.example.platzitest.presentation.theme.PurpleGrey40
 
 @Composable
 fun SoundItem(
@@ -142,7 +145,7 @@ private fun ItemReadMode(
             Image(
                 imageVector = if (innerLike) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
                 EMPTY_STRING,
-                colorFilter = ColorFilter.tint(if (innerLike) Color.Red else Color.Black),
+                colorFilter = ColorFilter.tint(if (innerLike) Purple40 else Purple80),
                 modifier = Modifier
                     .padding(end = Dimen10dp)
                     .size(Dimen30dp)
@@ -155,7 +158,7 @@ private fun ItemReadMode(
             Image(
                 imageVector = Icons.Filled.Edit,
                 EMPTY_STRING,
-                colorFilter = ColorFilter.tint(LightBlue),
+                colorFilter = ColorFilter.tint(PurpleGrey40),
                 modifier = Modifier
                     .padding(end = Dimen10dp)
                     .size(Dimen30dp)
@@ -252,7 +255,7 @@ private fun ItemEditionMode(
             Image(
                 imageVector = if (innerLike) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
                 EMPTY_STRING,
-                colorFilter = ColorFilter.tint(if (innerLike) Color.Red else Color.Black),
+                colorFilter = ColorFilter.tint(if (innerLike) Purple40 else Purple80),
                 modifier = Modifier
                     .padding(end = Dimen5dp)
                     .size(Dimen40dp)
