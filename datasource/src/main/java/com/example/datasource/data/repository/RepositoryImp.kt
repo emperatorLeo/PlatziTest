@@ -17,12 +17,16 @@ class RepositoryImp(
     override suspend fun getSearch(query: String) = flow<Response<List<SoundDto>>> {
         apiDataSource.getSearch(query).collect {
             if (it.isSuccessful) {
-                val listEntity =
-                    it.body()?.results?.map { soundItem -> soundItem.fromResponseToEntity() }
+                if (it.body()?.results.isNullOrEmpty()) {
+                    emit(success(emptyList()))
+                } else {
+                    val listEntity =
+                        it.body()?.results?.map { soundItem -> soundItem.fromResponseToEntity() }
 
-                localServices.feedDatabase(listEntity ?: emptyList())
-                getFromDataBase().collect { list ->
-                    emit(success(list))
+                    localServices.feedDatabase(listEntity ?: emptyList())
+                    getFromDataBase().collect { list ->
+                        emit(success(list))
+                    }
                 }
             } else {
                 emit(error(it.code(), it.errorBody()!!))

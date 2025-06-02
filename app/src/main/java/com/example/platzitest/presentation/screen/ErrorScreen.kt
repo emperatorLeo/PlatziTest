@@ -14,23 +14,24 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import com.example.platzitest.R
-import com.example.platzitest.presentation.theme.Dimen10dp
+import com.example.platzitest.presentation.theme.Dimen300dp
 import com.example.platzitest.presentation.theme.Font20sp
-import com.example.platzitest.presentation.theme.LightBlue
+import com.example.platzitest.presentation.theme.Purple40
 
 @Composable
 fun ErrorState() {
     Box(modifier = Modifier
         .fillMaxSize()
-        .background(Color.White)) {
+        .background(Color.White),
+        contentAlignment = Alignment.Center
+    ) {
 
         Text(
             modifier = Modifier
-                .padding(Dimen10dp)
-                .align(Alignment.Center),
+                .padding(top = Dimen300dp),
             text = stringResource(R.string.error_message),
             textAlign = TextAlign.Center,
-            style = TextStyle(fontSize = Font20sp, color = LightBlue, fontWeight = FontWeight.Bold)
+            style = TextStyle(fontSize = Font20sp, color = Purple40, fontWeight = FontWeight.Bold)
         )
     }
 }

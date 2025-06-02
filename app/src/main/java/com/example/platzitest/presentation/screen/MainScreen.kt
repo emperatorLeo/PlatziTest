@@ -1,5 +1,6 @@
 package com.example.platzitest.presentation.screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,9 +23,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.example.datasource.common.EMPTY_STRING
 import com.example.datasource.domain.dtos.SoundDto
+import com.example.details.presentation.state.UiState
 import com.example.platzitest.presentation.component.SearchBarComponent
 import com.example.platzitest.presentation.component.SoundItem
-import com.example.details.presentation.state.UiState
 import com.example.platzitest.presentation.theme.Dimen100dp
 import com.example.platzitest.presentation.theme.Dimen300dp
 import com.example.platzitest.presentation.theme.Dimen40dp
@@ -53,6 +54,7 @@ fun MainScreen(
         },
         floatingActionButtonPosition = FabPosition.Center
     ) { innerPadding ->
+        Box(Modifier.fillMaxSize().background(Color.White))
 
         LazyColumn(
             Modifier.padding(innerPadding),
