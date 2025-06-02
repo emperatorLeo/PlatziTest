@@ -17,6 +17,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
@@ -27,7 +28,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
@@ -35,6 +35,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.media3.common.MediaItem
+import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
 import com.example.datasource.domain.dtos.SoundDetailsDto
@@ -56,10 +57,7 @@ import com.lottiefiles.dotlottie.core.compose.ui.DotLottieAnimation
 import com.lottiefiles.dotlottie.core.util.DotLottieSource
 
 @Composable
-fun DetailScreen(uiState: State<UiState>, goBack: () -> Unit) {
-
-    val context = LocalContext.current
-    val exoPlayer = ExoPlayer.Builder(context).build()
+fun DetailScreen(uiState: State<UiState>, exoPlayer: ExoPlayer, goBack: () -> Unit) {
     var mediaSource by remember { mutableStateOf(MediaItem.fromUri(EXAMPLE_AUDIO_URI)) }
 
     when (uiState.value) {
@@ -91,7 +89,9 @@ fun DetailScreen(uiState: State<UiState>, goBack: () -> Unit) {
             }
         }
 
-        else -> { ErrorState() }
+        else -> {
+            ErrorState()
+        }
     }
 }
 
@@ -103,15 +103,22 @@ fun SuccessDetailScreen(
 ) {
     val lottieController = remember { DotLottieController() }
 
-    /*exoPlayer.addListener(object : Player.Listener {
-        override fun onIsPlayingChanged(isPlaying: Boolean) {
-            if (isPlaying) {
-                lottieController.play()
-            } else {
-                lottieController.pause()
+    DisposableEffect(exoPlayer, lottieController) {
+        val listener = object : Player.Listener {
+            override fun onIsPlayingChanged(isPlaying: Boolean) {
+                if (isPlaying) {
+                    lottieController.play()
+                } else {
+                    lottieController.pause()
+                }
+
             }
         }
-    })*/
+        exoPlayer.addListener(listener)
+        onDispose {
+            exoPlayer.removeListener(listener)
+        }
+    }
 
     Column(
         Modifier
@@ -132,7 +139,6 @@ fun SuccessDetailScreen(
                 .clickable {
                     exoPlayer.playWhenReady = false
                     exoPlayer.stop()
-                    exoPlayer.release()
                     goBack()
                 }
         )

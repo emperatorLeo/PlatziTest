@@ -55,14 +55,17 @@ dependencies {
     // Gson
     implementation(libs.gson)
 
-    // Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.gson.converter)
-
     // Hilt
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation)
     ksp(libs.hilt.android.compiler)
+
+    // Media3
+    implementation(libs.media3.exoplayer)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.gson.converter)
 
     testImplementation(libs.coroutines.test)
     testImplementation(libs.androidx.arch.core.testing)
