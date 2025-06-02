@@ -5,6 +5,9 @@
 1. Clona el repo
 2. Abre la carpeta PlatziTest usando Android Studio
 3. Corre el proyecto en emulador o dispositivo(recomendado)
+4. Para hacer una busqueda introduce algún sonido que quieras escuchar en el buscador y
+   pulsa el icono de buscar en el keyboard del teclado o en el icono de busqueda que esta a la
+   izquierda del buscador
 
 ## 🦾 Technical Stack
 
@@ -20,7 +23,7 @@
 + Linter: Ktlint
 + pruebas unitarias usando Mockk
 
-
 ## 🥲 Cosas que faltaron por implementar
-+ Paginación 
+
++ Paginación
 + Pulir la vista
