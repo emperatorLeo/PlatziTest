@@ -35,20 +35,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import com.example.datasource.common.EMPTY_STRING
 import com.example.datasource.domain.dtos.SoundDto
+import com.example.details.presentation.theme.CircularTypography
 import com.example.platzitest.R
 import com.example.platzitest.presentation.theme.Dimen10dp
 import com.example.platzitest.presentation.theme.Dimen200dp
-import com.example.platzitest.presentation.theme.Dimen230dp
 import com.example.platzitest.presentation.theme.Dimen30dp
-import com.example.platzitest.presentation.theme.Dimen40dp
 import com.example.platzitest.presentation.theme.Dimen5dp
-import com.example.platzitest.presentation.theme.Font10sp
-import com.example.platzitest.presentation.theme.Font12sp
-import com.example.platzitest.presentation.theme.Font15sp
 import com.example.platzitest.presentation.theme.IntenseRed
 import com.example.platzitest.presentation.theme.LightBlue
 import com.example.platzitest.presentation.theme.Purple40
@@ -64,16 +58,19 @@ fun SoundItem(
 ) {
     var isEditionMode by remember { mutableStateOf(false) }
     var innerSound by remember { mutableStateOf(sound) }
-
+    var integerResource by remember { mutableIntStateOf(R.drawable.ic_launcher_foreground) }
+    LaunchedEffect(Unit) {
+        integerResource = imageSelector()
+    }
     if (!isEditionMode) {
         ItemReadMode(innerSound, onItemClick, {
             isEditionMode = !isEditionMode
-        }, onDeleteItem) {
+        }, onDeleteItem, integerResource) {
             innerSound = it
             saveChanges(innerSound)
         }
     } else {
-        ItemEditionMode(sound, onDeleteItem, onItemClick) {
+        ItemEditionMode(sound, onDeleteItem, onItemClick, integerResource) {
             innerSound = it
             saveChanges(innerSound)
             isEditionMode = !isEditionMode
@@ -87,10 +84,10 @@ private fun ItemReadMode(
     onItemClick: (Int) -> Unit,
     edition: () -> Unit,
     onDeleteItem: (SoundDto) -> Unit,
+    integerResource: Int,
     saveChanges: (SoundDto) -> Unit
 ) {
     var innerLike by remember { mutableStateOf(sound.like) }
-    var integerResource by remember { mutableIntStateOf(R.drawable.ic_launcher_foreground) }
 
     Column(
         modifier = Modifier
@@ -105,15 +102,14 @@ private fun ItemReadMode(
             verticalAlignment = Alignment.CenterVertically
         ) {
 
-            LaunchedEffect(Unit) {
-                integerResource = imageSelector()
-            }
-
             Image(
                 painter = painterResource(integerResource),
                 "",
-                Modifier.size(Dimen30dp).padding(end = Dimen5dp)
+                Modifier
+                    .size(Dimen30dp)
+                    .padding(end = Dimen5dp)
             )
+
             Column(
                 modifier = Modifier
                     .width(width = Dimen200dp)
@@ -125,20 +121,19 @@ private fun ItemReadMode(
                     modifier = Modifier.padding(top = Dimen5dp),
                     text = stringResource(R.string.id_label, sound.id),
                     color = LightBlue,
-                    fontSize = Font10sp
+                    style = CircularTypography.headlineSmall
                 )
 
                 Text(
                     text = sound.name,
                     color = Color.Black,
-                    fontSize = Font15sp,
-                    fontWeight = FontWeight.Bold
+                    style = CircularTypography.bodyLarge
                 )
 
                 Text(
                     text = stringResource(R.string.author_label, sound.username),
                     color = Color.Black,
-                    fontSize = Font12sp
+                    style = CircularTypography.bodyMedium
                 )
             }
 
@@ -169,7 +164,7 @@ private fun ItemReadMode(
 
             Image(
                 imageVector = Icons.Filled.Delete,
-                    EMPTY_STRING,
+                EMPTY_STRING,
                 colorFilter = ColorFilter.tint(IntenseRed),
                 modifier = Modifier
                     .size(Dimen30dp)
@@ -187,6 +182,7 @@ private fun ItemEditionMode(
     sound: SoundDto,
     onDeleteItem: (SoundDto) -> Unit,
     onItemClicked: (Int) -> Unit,
+    integerResource: Int,
     saveChanges: (SoundDto) -> Unit
 ) {
     var innerLike by remember { mutableStateOf(sound.like) }
@@ -201,18 +197,27 @@ private fun ItemEditionMode(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = Dimen5dp, end = Dimen5dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .background(Color.White),
+                .background(Color.White)
+                .padding(start = Dimen5dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            Image(
+                painter = painterResource(integerResource),
+                "",
+                Modifier
+                    .size(Dimen30dp)
+                    .padding(end = Dimen5dp)
+            )
+
             Column(
                 modifier = Modifier
-                    .width(width = Dimen230dp)
+                    .width(width = Dimen200dp)
+                    .padding(start = Dimen10dp)
                     .wrapContentHeight()
                     .clickable {
                         onItemClicked(sound.id)
@@ -223,7 +228,7 @@ private fun ItemEditionMode(
                     modifier = Modifier.padding(top = Dimen5dp),
                     text = stringResource(R.string.id_label, sound.id),
                     color = LightBlue,
-                    fontSize = Font10sp
+                    style = CircularTypography.headlineSmall
                 )
 
                 TextField(
@@ -235,7 +240,7 @@ private fun ItemEditionMode(
                         focusedContainerColor = Color.White,
                         focusedTextColor = Color.Black
                     ),
-                    textStyle = TextStyle(fontSize = Font15sp, fontWeight = FontWeight.Bold),
+                    textStyle = CircularTypography.bodyLarge,
                     modifier = Modifier.focusRequester(focusRequester)
                 )
 
@@ -248,7 +253,7 @@ private fun ItemEditionMode(
                         focusedContainerColor = Color.White,
                         focusedTextColor = Color.Black
                     ),
-                    textStyle = TextStyle(fontSize = Font12sp)
+                    textStyle = CircularTypography.bodyMedium
                 )
             }
 
@@ -257,8 +262,8 @@ private fun ItemEditionMode(
                 EMPTY_STRING,
                 colorFilter = ColorFilter.tint(if (innerLike) Purple40 else Purple80),
                 modifier = Modifier
-                    .padding(end = Dimen5dp)
-                    .size(Dimen40dp)
+                    .padding(end = Dimen10dp)
+                    .size(Dimen30dp)
                     .clickable {
                         innerLike = !innerLike
                         saveChanges(sound.copy(like = innerLike))
@@ -268,10 +273,10 @@ private fun ItemEditionMode(
             Image(
                 imageVector = Icons.Rounded.CheckCircle,
                 EMPTY_STRING,
-                colorFilter = ColorFilter.tint(LightBlue),
+                colorFilter = ColorFilter.tint(Purple40),
                 modifier = Modifier
-                    .padding(end = Dimen5dp)
-                    .size(Dimen40dp)
+                    .padding(end = Dimen10dp)
+                    .size(Dimen30dp)
                     .clickable {
                         saveChanges(
                             sound.copy(
@@ -288,7 +293,7 @@ private fun ItemEditionMode(
                 EMPTY_STRING,
                 colorFilter = ColorFilter.tint(IntenseRed),
                 modifier = Modifier
-                    .size(Dimen40dp)
+                    .size(Dimen30dp)
                     .clickable {
                         onDeleteItem(sound)
                     }
@@ -298,7 +303,7 @@ private fun ItemEditionMode(
     }
 }
 
-private fun imageSelector(): Int  {
+private fun imageSelector(): Int {
     val random = (0..4).random()
 
     val resources = when (random) {

@@ -20,9 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
 import com.example.datasource.common.EMPTY_STRING
+import com.example.details.presentation.theme.CircularTypography
 import com.example.platzitest.R
 import com.example.platzitest.presentation.testing.SEARCH_BAR_TEST_TAG
 import com.example.platzitest.presentation.theme.Dimen10dp
@@ -74,7 +73,7 @@ fun SearchBarComponent(
                 Text(
                     stringResource(R.string.search_sound),
                     fontSize = Font12sp,
-                    style = TextStyle(fontStyle = FontStyle.Italic),
+                    style = CircularTypography.bodyMedium,
                     modifier = Modifier.testTag(SEARCH_BAR_TEST_TAG),
                     color = Purple40
                 )
