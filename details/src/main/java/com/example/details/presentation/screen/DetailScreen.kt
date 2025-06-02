@@ -30,8 +30,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.media3.common.MediaItem
@@ -43,6 +41,7 @@ import com.example.details.R
 import com.example.details.common.EXAMPLE_AUDIO_URI
 import com.example.details.common.LOTTIE_URI
 import com.example.details.presentation.state.UiState
+import com.example.details.presentation.theme.CircularTypography
 import com.example.details.presentation.theme.DarkPurple
 import com.example.details.presentation.theme.Dimen100dp
 import com.example.details.presentation.theme.Dimen10dp
@@ -50,8 +49,6 @@ import com.example.details.presentation.theme.Dimen200dp
 import com.example.details.presentation.theme.Dimen20dp
 import com.example.details.presentation.theme.Dimen30dp
 import com.example.details.presentation.theme.Dimen50dp
-import com.example.details.presentation.theme.Font15sp
-import com.example.details.presentation.theme.Font20sp
 import com.lottiefiles.dotlottie.core.compose.runtime.DotLottieController
 import com.lottiefiles.dotlottie.core.compose.ui.DotLottieAnimation
 import com.lottiefiles.dotlottie.core.util.DotLottieSource
@@ -145,25 +142,22 @@ fun SuccessDetailScreen(
 
         Text(
             text = stringResource(R.string.id_label, soundDetailsDto.id),
-            style = TextStyle(
-                fontSize = Font15sp,
-                color = Color.White,
-                fontWeight = FontWeight.Bold
-            ),
+            style = CircularTypography.bodyLarge,
             modifier = Modifier
                 .padding(top = Dimen10dp, start = Dimen20dp)
-                .align(Alignment.Start)
+                .align(Alignment.Start),
+            color = Color.White
         )
 
         Text(
             text = soundDetailsDto.name,
-            style = TextStyle(fontSize = Font20sp, color = Color.White),
+            style = CircularTypography.bodyLarge,
             modifier = Modifier.padding(top = Dimen10dp)
         )
 
         Text(
             text = AnnotatedString.Companion.fromHtml(soundDetailsDto.description),
-            style = TextStyle(fontSize = Font15sp, color = Color.White),
+            style = CircularTypography.bodyMedium,
             modifier = Modifier
                 .padding(Dimen10dp)
                 .height(Dimen100dp)
